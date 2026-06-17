@@ -8,6 +8,7 @@ import mediScanImage from "../public/mediScan.png";
 import mgnregaDashboardImage from "../public/mgnregaDashboardImage.png";
 import babuaLmsImage from "../public/babuaLmsImage.png"; 
 import whatsappLandingPageImage from "../public/whatsappLandingPageImage.png"; 
+import layersCloneImage from "../public/layersCloneImage.png"; 
 
 export type Project = {
      slug: string;
@@ -190,6 +191,35 @@ export const projects: Project[] = [
           image: mediScanImage,
           views: 33,
      },
+     {
+  slug: "layers-clone",
+  title: "Layers Clone",
+  dateRange: "05.2025 – 05.2025",
+  status: "Live",
+  badge: "Featured",
+  summary:
+    "A modern e-commerce landing page clone inspired by Layers, featuring premium animations, responsive layouts, and smooth user interactions built with GSAP and modern frontend technologies.",
+  features: [
+    "Recreated the Layers product showcase experience with a focus on visual fidelity and responsive design",
+    "Implemented GSAP-powered animations and scroll interactions to enhance engagement and storytelling",
+    "Built using Vite for fast development and optimized performance across modern browsers",
+    "Designed fully responsive layouts for desktop, tablet, and mobile devices with Tailwind CSS",
+  ],
+  techStack: [
+    "HTML5",
+    "CSS3",
+    "JavaScript",
+    "Vite",
+    "GSAP",
+    "Tailwind CSS",
+    "Responsive Design",
+    "Vercel",
+  ],
+  liveUrl: "https://layers-clone-git-main-abhishek-iitps-projects.vercel.app/",
+  githubUrl: "https://github.com/Abhishek-IITP/layers-clone",
+  image: layersCloneImage,
+  views: 0,
+}
 ];
 
 // Status indicator dot component
