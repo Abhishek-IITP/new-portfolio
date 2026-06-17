@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ChevronDown, ChevronUp, Link2 } from "lucide-react";
+import { ChevronDown, ChevronUp, Link2, ChevronLeft, Sun, ArrowUpRight } from "lucide-react";
 import blogSphereImage from "../public/BlogSphere.png";
 import pingMeImage from "../public/PingMe.png";
 import oceanImage from "../public/ocean.png";
@@ -260,11 +260,11 @@ type ProjectItemProps = {
 
 function ProjectItem({ project, isOpen, onToggle, onImageClick }: ProjectItemProps) {
      return (
-          <div className="border-b border-zinc-200 last:border-b-0">
+          <div className="rounded-2xl border border-zinc-200 bg-white p-5 shadow-[0_4px_12px_rgba(24,24,27,0.02)] transition-all duration-200 hover:border-zinc-300 hover:shadow-[0_8px_24px_rgba(24,24,27,0.04)]">
                <button
                     type="button"
                     onClick={onToggle}
-                    className="block w-full py-4 text-left transition-colors hover:bg-zinc-50/80"
+                    className="block w-full text-left focus:outline-hidden"
                     aria-expanded={isOpen}
                >
                     <div className="flex w-full items-start gap-7">
@@ -305,67 +305,67 @@ function ProjectItem({ project, isOpen, onToggle, onImageClick }: ProjectItemPro
                               </div>
                          </div>
                     </div>
-
-                    {isOpen ? (
-                         <div className="mt-4 w-full space-y-4">
-                              <button
-                                   type="button"
-                                   onClick={event => {
-                                        event.stopPropagation();
-                                        onImageClick();
-                                   }}
-                                   className="group block w-full overflow-hidden rounded-lg border border-zinc-200 bg-zinc-50 text-left"
-                              >
-                                   <img
-                                        src={project.image}
-                                        alt={`${project.title} screenshot`}
-                                        className="h-56 w-full object-cover transition-transform duration-300 group-hover:scale-[1.02] md:h-72"
-                                   />
-                                   <div className="border-t border-zinc-200 px-3 py-2 text-[0.78rem] font-medium uppercase tracking-[0.15em] text-zinc-500">
-                                        Click to expand image
-                                   </div>
-                              </button>
-
-                              <p className="w-full text-[0.95rem] leading-6 text-zinc-900">{project.summary}</p>
-
-                              <ul className="w-full space-y-2.5">
-                                   {project.features.map(feature => (
-                                        <li key={feature} className="flex gap-3 text-[0.92rem] leading-6 text-zinc-800">
-                                             <span className="mt-[0.72rem] h-1 w-1 shrink-0 rounded-full bg-zinc-700" />
-                                             <span>{feature}</span>
-                                        </li>
-                                   ))}
-                              </ul>
-
-                              <div className="flex w-full flex-wrap gap-2 pt-1">
-                                   {project.techStack.map(tag => (
-                                        <span
-                                             key={tag}
-                                             className="inline-flex items-center rounded-md border border-zinc-400 bg-zinc-50 px-2.5 py-1 text-[0.8rem] font-medium text-zinc-700"
-                                        >
-                                             {tag}
-                                        </span>
-                                   ))}
-                              </div>
-                         </div>
-                    ) : null}
                </button>
+
+               {isOpen ? (
+                    <div className="mt-4 w-full space-y-4">
+                         <button
+                              type="button"
+                              onClick={event => {
+                                   event.stopPropagation();
+                                   onImageClick();
+                              }}
+                              className="group block w-full overflow-hidden rounded-lg border border-zinc-200 bg-zinc-50 text-left"
+                         >
+                              <img
+                                   src={project.image}
+                                   alt={`${project.title} screenshot`}
+                                   className="h-56 w-full object-cover transition-transform duration-300 group-hover:scale-[1.02] md:h-72"
+                              />
+                              <div className="border-t border-zinc-200 px-3 py-2 text-[0.78rem] font-medium uppercase tracking-[0.15em] text-zinc-500">
+                                   Click to expand image
+                              </div>
+                         </button>
+
+                         <p className="w-full text-[0.95rem] leading-6 text-zinc-900">{project.summary}</p>
+
+                         <ul className="w-full space-y-2.5">
+                              {project.features.map(feature => (
+                                   <li key={feature} className="flex gap-3 text-[0.92rem] leading-6 text-zinc-800">
+                                        <span className="mt-[0.72rem] h-1 w-1 shrink-0 rounded-full bg-zinc-700" />
+                                        <span>{feature}</span>
+                                   </li>
+                              ))}
+                         </ul>
+
+                         <div className="flex w-full flex-wrap gap-2 pt-1">
+                              {project.techStack.map(tag => (
+                                   <span
+                                        key={tag}
+                                        className="inline-flex items-center rounded-lg border border-zinc-200 bg-zinc-50 px-3 py-1 text-[0.78rem] font-semibold text-zinc-700 hover:border-zinc-300 transition-colors"
+                                   >
+                                        {tag}
+                                   </span>
+                              ))}
+                         </div>
+                    </div>
+               ) : null}
           </div>
      );
 }
 
-export function ProjectSection() {
+export function ProjectSection({ isFullPage = false }: { isFullPage?: boolean }) {
      const [copied, setCopied] = useState(false);
      const [expandedIndex, setExpandedIndex] = useState<number | null>(0);
      const [showAll, setShowAll] = useState(false);
      const [previewProjectIndex, setPreviewProjectIndex] = useState<number | null>(null);
-
-     const visibleProjects = showAll ? projects : projects.slice(0, INITIAL_VISIBLE);
-     const hasHiddenProjects = projects.length > INITIAL_VISIBLE;
-
+ 
+     const visibleProjects = isFullPage ? projects : (showAll ? projects : projects.slice(0, INITIAL_VISIBLE));
+     const hasHiddenProjects = !isFullPage && projects.length > INITIAL_VISIBLE;
+ 
      const copySectionLink = async () => {
           const shareUrl = `${window.location.origin}/#projects`;
-
+ 
           try {
                await navigator.clipboard.writeText(shareUrl);
                setCopied(true);
@@ -373,10 +373,10 @@ export function ProjectSection() {
           } catch {
                // Ignore clipboard failures in unsupported contexts.
           }
-
+ 
           playCopySound();
      };
-
+ 
      const handleProjectToggle = (index: number) => {
           setExpandedIndex(current => {
                const isExpanding = current !== index;
@@ -386,44 +386,81 @@ export function ProjectSection() {
                return current === index ? null : index;
           });
      };
-
+ 
      useEffect(() => {
           if (previewProjectIndex === null) return;
-
+ 
           const onEscape = (event: KeyboardEvent) => {
                if (event.key === "Escape") {
                     setPreviewProjectIndex(null);
                }
           };
-
+ 
           window.addEventListener("keydown", onEscape);
           return () => window.removeEventListener("keydown", onEscape);
-     }, [previewProjectIndex]);
-
+      }, [previewProjectIndex]);
+ 
      return (
-          <section className="relative w-full overflow-hidden border-y border-zinc-200 bg-white px-10 py-3 text-zinc-900">
+          <section className={`relative w-full overflow-hidden bg-white text-zinc-900 ${isFullPage ? "pb-10" : "border-y border-zinc-200 px-10 py-3"}`}>
                <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.04)_1px,transparent_1px)] bg-size-[100%_100%,100%_100%] opacity-40" />
+ 
+               {/* Standalone Full-Page Header */}
+               {isFullPage && (
+                    <div className="relative border-b border-zinc-200 bg-white px-8 py-3 flex justify-between items-center text-zinc-900 mb-6">
+                         <div className="flex items-center gap-4">
+                              <a
+                                   href="#/"
+                                   className="h-8 w-8 rounded-lg bg-zinc-950 flex items-center justify-center hover:bg-zinc-800 transition-all cursor-pointer text-white hover:scale-[1.05]"
+                                   aria-label="Back to home"
+                              >
+                                   <ChevronLeft className="h-5 w-5" />
+                              </a>
+                              <h2 className="text-[1.35rem] font-bold text-zinc-950 leading-none">
+                                   All Projects
+                              </h2>
+                         </div>
 
-               <div className="relative border-y border-zinc-200 py-1">
-                    <button
-                         id="projects"
-                         type="button"
-                         onClick={copySectionLink}
-                         className="group inline-flex items-center gap-3 text-left"
-                         aria-label="Copy projects section link"
-                    >
-                         <h2 className="text-[1.9rem] font-semibold leading-none tracking-tight text-zinc-950">
-                              Projects{" "}
-                              <span className="text-zinc-400">({projects.length})</span>
-                         </h2>
-                         <Link2 className="h-5 w-5 text-zinc-500 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:text-zinc-800" />
-                         <span className="text-[0.7rem] font-medium uppercase tracking-[0.24em] text-zinc-400 transition-opacity duration-200 group-hover:text-zinc-500">
-                              {copied ? "Copied" : " "}
-                         </span>
-                    </button>
-               </div>
+                         <div className="flex items-center gap-2">
+                              <button
+                                   type="button"
+                                   className="px-3 py-1.5 text-[0.8rem] font-semibold text-white bg-zinc-950 hover:bg-zinc-800 rounded-lg transition-colors cursor-pointer flex items-center justify-center tracking-wide"
+                              >
+                                   ⌘ K
+                              </button>
+                              <button
+                                   type="button"
+                                   className="h-8 w-8 rounded-lg bg-zinc-950 flex items-center justify-center hover:bg-zinc-800 transition-colors cursor-pointer text-white"
+                                   aria-label="Toggle theme"
+                              >
+                                   <Sun className="h-4 w-4" />
+                              </button>
+                         </div>
+                    </div>
+               )}
 
-               <div className="relative mt-1 w-full">
+               {/* Main Home Page Header */}
+               {!isFullPage && (
+                    <div className="relative border-y border-zinc-200 py-1">
+                         <button
+                              id="projects"
+                              type="button"
+                              onClick={copySectionLink}
+                              className="group inline-flex items-center gap-3 text-left"
+                              aria-label="Copy projects section link"
+                         >
+                              <h2 className="text-[2.5rem] font-semibold leading-none tracking-tight text-zinc-950">
+                                   Projects{" "}
+                                   <span className="text-zinc-400 text-[1.7rem]">({projects.length})</span>
+                              </h2>
+                              <Link2 className="h-5 w-5 text-zinc-500 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:text-zinc-800" />
+                              <span className="text-[0.7rem] font-medium uppercase tracking-[0.24em] text-zinc-400 transition-opacity duration-200 group-hover:text-zinc-500">
+                                   {copied ? "Copied" : " "}
+                              </span>
+                         </button>
+                    </div>
+               )}
+ 
+               <div className={`relative mt-4 w-full space-y-4 ${isFullPage ? "px-8" : ""}`}>
                     {visibleProjects.map((project, index) => (
                          <ProjectItem
                               key={project.title}
@@ -434,17 +471,16 @@ export function ProjectSection() {
                          />
                     ))}
                </div>
-
+ 
                {hasHiddenProjects && !showAll ? (
-                    <div className="relative mt-2 flex justify-center pb-2 pt-4">
-                         <button
-                              type="button"
-                              onClick={() => setShowAll(true)}
-                              className="inline-flex items-center gap-2 rounded-md border border-zinc-200 bg-white px-4 py-2 text-[0.88rem] font-medium text-zinc-700 transition-colors hover:border-zinc-300 hover:bg-zinc-50 hover:text-zinc-950"
+                    <div className="relative mt-8 flex justify-center pb-4">
+                         <a
+                              href="#/projects-all"
+                              className="inline-flex items-center gap-2 rounded-xl bg-zinc-950 hover:bg-zinc-800 px-6 py-2.5 text-[0.88rem] font-bold text-white transition-all hover:scale-[1.02] active:scale-[0.98] shadow-sm cursor-pointer"
                          >
-                              Show More
-                              <ChevronDown className="h-4 w-4" />
-                         </button>
+                              View All
+                              <ArrowUpRight className="h-4 w-4 text-white" />
+                         </a>
                     </div>
                ) : null}
 

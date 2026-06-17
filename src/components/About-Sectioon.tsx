@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link2 } from "lucide-react";
 
-const myInfo = ` Hello
+const myInfo = ` Hola 👋
 
 - I'm Abhishek Kumar Mohanty (call me Abhi) — a Full-Stack Developer and IIT Patna student focused on building modern web applications and AI-driven solutions.
 
@@ -98,7 +98,7 @@ export function AboutSection() {
                          className="group inline-flex items-center gap-3 text-left"
                          aria-label="Copy hello section link"
                     >
-                         <h2 className="text-[1.9rem] font-semibold leading-none tracking-tight text-zinc-950">
+                         <h2 className="text-[2.5rem] font-semibold leading-none tracking-tight text-zinc-950">
                               {headingLine.replace(/^##\s*/, "")}
                          </h2>
                          <Link2 className="h-5 w-5 text-zinc-500 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:text-zinc-800" />
@@ -108,10 +108,11 @@ export function AboutSection() {
                     </button>
                </div>
 
-               <ul className="relative mt-8 space-y-5 px-3 text-[1.1rem] leading-6 text-zinc-800">
+
+               <ul className="relative mt-8 space-y-5 rounded-2xl border border-zinc-200 bg-white p-6 shadow-[0_4px_12px_rgba(24,24,27,0.02)] text-[1.1rem] leading-6 text-zinc-800 transition-all duration-200 hover:border-zinc-300">
                     {bullets.map((bullet, index) => (
                          <li key={index} className="flex gap-3">
-                              <span className="mt-[0.95rem] h-1.5 w-1.5 shrink-0 rounded-full bg-zinc-400" />
+                              <span className="mt-[0.72rem] h-1.5 w-1.5 shrink-0 rounded-full bg-zinc-400" />
                               <span className="tracking-tight font-sans">{bullet}</span>
                          </li>
                     ))}

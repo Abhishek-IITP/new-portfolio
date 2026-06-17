@@ -1,4 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=DotGothic16&family=VT323&display=swap');
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+.dotted-clock {
+  font-family: 'DotGothic16', 'VT323', monospace !important;
+}
+
+.theme-toggle svg {
+  width: 2.25rem !important;
+  height: 2.25rem !important;
+}
 
 @layer base {
   html,
@@ -10,4 +21,105 @@
   body {
     margin: 0;
   }
+}
+
+html,
+body {
+  transition:
+    background-color 0.35s ease,
+    color 0.35s ease;
+}
+
+* {
+  transition:
+    background-color 0.35s ease,
+    color 0.35s ease,
+    border-color 0.35s ease;
+}
+
+.toggling-theme,
+.toggling-theme * {
+  transition: none !important;
+}
+
+::view-transition-old(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-new(root) {
+  animation: curtain-down 1.4s cubic-bezier(0.25, 1, 0.5, 1) both;
+  mix-blend-mode: normal;
+}
+
+@keyframes curtain-down {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.dark {
+  background-color: #09090b !important;
+}
+
+.dark body,
+.dark #root,
+.dark .bg-zinc-950 {
+  background-color: #09090b !important;
+}
+
+.dark section:not(.rounded-2xl):not(.rounded-3xl):not(.rounded-xl),
+.dark .relative.border-b.border-zinc-200.bg-white {
+  background-color: #09090b !important;
+}
+
+.dark .bg-white {
+  background-color: #000000 !important;
+}
+
+.dark .bg-zinc-50 {
+  background-color: #09090b !important;
+}
+
+.dark .bg-zinc-100 {
+  background-color: #1c1c1f !important;
+}
+
+.dark {
+  .text-zinc-900,
+  .text-zinc-950,
+  .text-zinc-800,
+  .text-zinc-700,
+  .text-zinc-650 {
+    color: #f4f4f5 !important;
+  }
+  .text-zinc-500,
+  .text-zinc-600 {
+    color: #a1a1aa !important;
+  }
+  
+  .border-zinc-200,
+  .border-zinc-300 {
+    border-color: #27272a !important;
+  }
+  
+  .hover\:bg-zinc-50:hover {
+    background-color: #1c1c1f !important;
+  }
+  .hover\:bg-zinc-100:hover {
+    background-color: #27272a !important;
+  }
+  .hover\:border-zinc-300:hover {
+    border-color: #3f3f46 !important;
+  }
+}
+
+.tech-logo {
+  filter: grayscale(1) brightness(0);
+}
+.dark .tech-logo {
+  filter: grayscale(1) brightness(0) invert(1) !important;
 }

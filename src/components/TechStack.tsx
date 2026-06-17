@@ -81,6 +81,60 @@ const techSections: TechSection[] = [
      },
 ];
 
+const logoMapping: Record<string, string> = {
+     "typescript": "typescript",
+     "javascript": "javascript",
+     "python": "python",
+     "c/c++": "cplusplus",
+     "html/css": "html5",
+     "react": "react",
+     "next.js": "nextdotjs",
+     "tailwind css": "tailwindcss",
+     "shadcn/ui": "shadcnui",
+     "radix ui": "radixui",
+     "motion": "framer",
+     "tanstack query": "reactquery",
+     "redux": "redux",
+     "node.js": "nodedotjs",
+     "bun": "bun",
+     "express.js": "express",
+     "django": "django",
+     "fastapi": "fastapi",
+     "postgresql": "postgresql",
+     "mongodb": "mongodb",
+     "mysql": "mysql",
+     "supabase": "supabase",
+     "redis": "redis",
+     "git": "git",
+     "docker": "docker",
+     "kubernetes (basics)": "kubernetes",
+     "aws ec2": "amazonec2",
+     "jenkins (ci/cd pipelines)": "jenkins",
+     "prisma": "prisma",
+     "socket.io": "socketdotio",
+     "vs code": "visualstudiocode",
+     "pycharm": "pycharm",
+     "cursor": "cursor",
+     "pandas": "pandas",
+     "numpy": "numpy",
+     "matplotlib": "matplotlib",
+};
+
+function getLogoUrl(label: string): string {
+     const cleanLabel = label.toLowerCase().trim();
+     switch (cleanLabel) {
+          case "vs code":
+               return "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/visualstudiocode.svg";
+          case "aws ec2":
+               return "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/amazonwebservices.svg";
+          case "matplotlib":
+               return "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/matplotlib/matplotlib-original.svg";
+          default:
+               const slug = logoMapping[cleanLabel] || cleanLabel.replace(/[^a-z0-9]/g, "");
+               return `https://cdn.simpleicons.org/${slug}/000000`;
+     }
+}
+
 export function TechStack() {
      const [copied, setCopied] = useState(false);
 
@@ -166,18 +220,18 @@ export function TechStack() {
                      className="group inline-flex items-center gap-3 text-left"
                      aria-label="Copy hello section link"
                      >
-    <h2 className="text-[1.9rem] font-semibold leading-none tracking-tight text-zinc-950">
+    <h2 className="text-[2.5rem] font-semibold leading-none tracking-tight text-zinc-950">
                               Stack
-                         </h2>
-                         <Link2 className="h-5 w-5 text-zinc-500 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:text-zinc-800" />
-                         <span className="text-[0.7rem] font-medium uppercase tracking-[0.24em] text-zinc-400 transition-opacity duration-200 group-hover:text-zinc-500">
-                              {copied ? "Copied" : " "}
-                         </span>
+                          </h2>
+                          <Link2 className="h-5 w-5 text-zinc-500 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:text-zinc-800" />
+                          <span className="text-[0.7rem] font-medium uppercase tracking-[0.24em] text-zinc-400 transition-opacity duration-200 group-hover:text-zinc-500">
+                               {copied ? "Copied" : " "}
+                          </span>
     </button>
                     </div>
                </div>
 
-               <div className="relative divide-y divide-zinc-200">
+               <div className="relative mt-6 rounded-2xl border border-zinc-200 bg-white p-5 sm:p-6 shadow-[0_4px_12px_rgba(24,24,27,0.02)] divide-y divide-zinc-200">
                     {techSections.map(section => (
                          <div key={section.index} className="grid gap-3 py-3 md:grid-cols-[190px_1fr] md:gap-4">
                               <div className="text-[0.92rem] font-medium text-zinc-500 md:pt-1">
@@ -191,11 +245,13 @@ export function TechStack() {
                                              href={item.href}
                                              target="_blank"
                                              rel="noreferrer"
-                                             className="inline-flex items-center gap-1.5 rounded-md border border-zinc-200 bg-white px-2.5 py-1 text-[0.82rem] font-medium text-zinc-900 shadow-[0_1px_0_rgba(0,0,0,0.02)] transition-colors duration-150 hover:border-zinc-300 hover:bg-zinc-50 hover:text-zinc-950"
+                                             className="inline-flex items-center gap-1.5 rounded-md border border-zinc-200 bg-zinc-50 px-2.5 py-1 text-[0.82rem] font-medium text-zinc-900 shadow-[0_1px_0_rgba(0,0,0,0.02)] transition-colors duration-150 hover:border-zinc-300 hover:bg-zinc-100 hover:text-zinc-950"
                                         >
-                                             <span className="flex h-3.5 w-3.5 items-center justify-center rounded-sm bg-zinc-200 text-[0.48rem] font-semibold leading-3.5 text-zinc-600">
-                                                  {item.label.slice(0, 2).toUpperCase()}
-                                             </span>
+                                             <img
+                                                  src={getLogoUrl(item.label)}
+                                                  alt={`${item.label} logo`}
+                                                  className="h-5 w-5 shrink-0 object-contain tech-logo"
+                                             />
                                              <span>{item.label}</span>
                                         </a>
                                    ))}

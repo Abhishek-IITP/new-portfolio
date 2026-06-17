@@ -9,12 +9,16 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "../styles/globals.css";
 import { App } from "./App";
+import { ThemeProvider } from "./context/ThemeProvider";
 
 const elem = document.getElementById("root")!;
 const app = (
+  
+  <ThemeProvider>
   <StrictMode>
     <App />
   </StrictMode>
+  </ThemeProvider>
 );
 
 // https://bun.com/docs/bundler/hot-reloading#import-meta-hot-data
