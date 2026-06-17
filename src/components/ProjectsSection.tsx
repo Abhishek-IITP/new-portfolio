@@ -1,59 +1,75 @@
-import { useEffect, useState } from "react";
-import { ChevronDown, ChevronUp, Link2, ChevronLeft, Sun, ArrowUpRight } from "lucide-react";
+import { useState } from "react";
+import { Link2, ArrowUpRight, ChevronLeft } from "lucide-react";
+import { motion } from "framer-motion";
 import blogSphereImage from "../public/BlogSphere.png";
 import pingMeImage from "../public/PingMe.png";
 import oceanImage from "../public/ocean.png";
 import mediScanImage from "../public/mediScan.png";
+import mgnregaDashboardImage from "../public/mgnregaDashboardImage.png";
+import babuaLmsImage from "../public/babuaLmsImage.png"; 
+import whatsappLandingPageImage from "../public/whatsappLandingPageImage.png"; 
 
-type Project = {
+export type Project = {
+     slug: string;
      title: string;
      dateRange: string;
      summary: string;
+     status: "Live" | "Building" | "Coming Soon" | "Archived";
+     badge?: "Featured" | "Coming Soon";
      features: string[];
      techStack: string[];
      liveUrl: string;
      githubUrl: string;
      image: string;
+     views?: number;
 };
 
-const projects: Project[] = [
+export const projects: Project[] = [
      {
+          slug: "blogsphere",
           title: "BlogSphere",
-          dateRange: "04.2025 – 04-2025",
-          summary:
-               "Full-featured blogging platform with OAuth, a rich editor, and social engagement built for scalable publishing.",
+          dateRange: "04.2025 – 04.2025",
+          status: "Live",
+          badge: "Featured",
+          summary: "Full-featured blogging platform with OAuth, a rich editor, and social engagement built for scalable publishing.",
           features: [
                "Google OAuth and JWT auth with email verification and Cloudinary-backed user profiles",
                "EditorJS-powered blog editor with media uploads and a responsive reading experience",
                "Likes, comments, and follower system for community-driven content discovery",
                "MVC-structured Express backend with a Redux-powered React frontend",
           ],
-          techStack: ["Node.js", "Express.js", "MongoDB", "React", "Firebase", "Redux"],
+          techStack: ["React 19", "Redux Toolkit", "Tailwind CSS", "Framer Motion", "Firebase", "Editor.js", "Node.js", "Express.js", "MongoDB", "Cloudinary"],
           liveUrl: "https://blog-sphere-zx96.vercel.app/",
           githubUrl: "https://github.com/Abhishek-IITP/BlogSphere",
           image: blogSphereImage,
+          views: 171,
      },
      {
+          slug: "pingme",
           title: "PingMe",
           dateRange: "05.2025 – 05.2025",
-          summary:
-               "Production-grade real-time social app with messaging, video calls, and a polished multi-theme UI.",
+          status: "Live",
+          badge: "Featured",
+          summary: "Production-grade real-time social app with messaging, video calls, and a polished multi-theme UI.",
           features: [
                "Real-time chat and WebRTC video calling with a friend request system",
                "Secure JWT authentication, protected routes, and a smooth onboarding flow",
                "32 customizable themes with responsive layouts across devices",
                "Optimized API layer with TanStack Query for reliable real-time sync",
           ],
-          techStack: ["Node.js", "Express.js", "MongoDB", "React", "TanStack Query", "Socket.io"],
+          techStack: ["Node.js", "Express.js", "MongoDB", "React", "TanStack Query", "Socket.io", "Tailwind CSS", "DaisyUI"],
           liveUrl: "https://pingme-1-r94w.onrender.com/",
           githubUrl: "https://github.com/Abhishek-IITP/PingMe",
           image: pingMeImage,
+          views: 98,
      },
      {
+          slug: "ocean",
           title: "Ocean",
           dateRange: "06.2025 – 07.2025",
-          summary:
-               "Full-stack scheduling platform with calendar sync, OAuth sign-in, and dynamic booking workflows.",
+          status: "Live",
+          badge: "Featured",
+          summary: "Full-stack scheduling platform with calendar sync, OAuth sign-in, and dynamic booking workflows.",
           features: [
                "Real-time calendar and meeting management powered by the Nylas API",
                "Google and GitHub OAuth via NextAuth with a Supabase Postgres backend",
@@ -64,12 +80,104 @@ const projects: Project[] = [
           liveUrl: "https://github.com/Abhishek-IITP/ocean",
           githubUrl: "https://github.com/Abhishek-IITP/ocean",
           image: oceanImage,
+          views: 64,
      },
      {
+          slug: "mgnrega-dashboard",
+          title: "MGNREGA Analytics Dashboard",
+          dateRange: "06.2026 – 06.2026",
+          status: "Live",
+          badge: "Featured",
+          summary:
+               "A modern analytics dashboard for MGNREGA employment data featuring real-time government data integration, advanced visualizations, district-level comparisons, and offline-first performance optimizations.",
+          features: [
+               "Real-time integration with data.gov.in APIs for district-wise MGNREGA employment analytics",
+               "Interactive charts, KPI cards, district comparison tools, CSV export, and paginated data exploration",
+               "Intelligent caching, data de-duplication, financial-year-aware sorting, and automatic field normalization",
+               "PWA-enabled dashboard with offline support, responsive design, location detection, and modern SaaS-inspired UI",
+          ],
+          techStack: [
+               "Next.js 16",
+               "React 19",
+               "TypeScript",
+               "Tailwind CSS v4",
+               "Recharts",
+               "PWA",
+               "Service Workers",
+               "REST APIs",
+               "data.gov.in API",
+               "Vercel",
+          ],
+          liveUrl: "https://bharatfellowship-mgnrega-dashboard.vercel.app/",
+          githubUrl: "https://github.com/Abhishek-IITP/MgNrega-Dashboard",
+          image: mgnregaDashboardImage,
+          views: 0,
+     },
+     {
+  slug: "babua-lms",
+  title: "Babua LMS",
+  dateRange: "06.2026 – 06.2026",
+  status: "Building",
+  badge: "Featured",
+  summary:
+    "A free-first learning platform designed around structured progress, accountability, and mentorship, ensuring students earn progress through consistency rather than binge-watching content.",
+  features: [
+    "Google and GitHub authentication with personalized dashboards and course-level progress tracking",
+    "Sequential lecture unlocking system that enforces structured learning and prevents content skipping",
+    "Daily streak tracking, resume-learning functionality, and lecture completion analytics for habit-based learning",
+    "Dedicated mentorship section separated from educational content, keeping learning free while enabling paid guidance",
+  ],
+  techStack: [
+    "Next.js",
+    "React",
+    "TypeScript",
+    "Auth.js",
+    "PostgreSQL",
+    "Supabase",
+    "Prisma ORM",
+    "Tailwind CSS",
+    "YouTube Embed API",
+    "Vercel",
+  ],
+  liveUrl: "https://github.com/Abhishek-IITP/babua_hackathon_lms",
+  githubUrl: "https://github.com/Abhishek-IITP/babua_hackathon_lms",
+  image: babuaLmsImage,
+  views: 0,
+},
+{
+  slug: "whatsapp-landing-page",
+  title: "WhatsApp Landing Page Clone",
+  dateRange: "05.2025 – 05.2025",
+  status: "Live",
+  badge: "Featured",
+  summary:
+    "A high-fidelity WhatsApp landing page clone showcasing advanced GSAP animations, smooth scroll-driven storytelling, and responsive frontend engineering.",
+  features: [
+    "Recreated WhatsApp's modern landing page with a strong focus on visual accuracy and user experience",
+    "Implemented GSAP-powered scroll animations, transitions, and interactive motion effects",
+    "Built a fully responsive layout optimized for desktop, tablet, and mobile devices",
+    "Focused on performance, smooth rendering, and engaging user interactions using modern web development practices",
+  ],
+  techStack: [
+    "HTML5",
+    "CSS3",
+    "JavaScript",
+    "GSAP",
+    "Responsive Design",
+    "Vercel",
+  ],
+  liveUrl: "https://whatsapp-landing-page-6dh1.vercel.app/",
+  githubUrl: "https://github.com/Abhishek-IITP/whatsapp-landing-page",
+  image: whatsappLandingPageImage,
+  views: 0,
+},
+     {
+          slug: "mediscan",
           title: "Medical Report Analyzer",
           dateRange: "06.2025 – 06.2025",
-          summary:
-               "AI-powered tool that reads medical PDFs and generates structured diagnostic summaries for quick review.",
+          status: "Live",
+          badge: "Featured",
+          summary: "AI-powered tool that reads medical PDFs and generates structured diagnostic summaries for quick review.",
           features: [
                "PDF upload and parsing pipeline using LLAMA through the Groq API",
                "LangChain workflow for turning unstructured reports into readable summaries",
@@ -77,336 +185,150 @@ const projects: Project[] = [
                "Lightweight Flask backend with EJS templates for simple deployment",
           ],
           techStack: ["Flask", "EJS", "LangChain", "Groq", "GenAI"],
-          liveUrl: "https://github.com/Abhishek-IITP/Medical-Report-Analyzer",
+          liveUrl: "https://medical-report-analyzer-production.up.railway.app/",
           githubUrl: "https://github.com/Abhishek-IITP/Medical-Report-Analyzer",
           image: mediScanImage,
+          views: 33,
      },
 ];
 
-const INITIAL_VISIBLE = 3;
-
-function playCopySound() {
-     const AudioContextClass =
-          window.AudioContext ||
-          (window as Window & typeof globalThis & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
-     const audioContext = AudioContextClass ? new AudioContextClass() : null;
-
-     if (!audioContext) return;
-
-     if (audioContext.state === "suspended") {
-          void audioContext.resume();
+// Status indicator dot component
+function StatusDot({ status }: { status: Project["status"] }) {
+     if (status === "Live") {
+          return (
+               <span className="flex items-center gap-1.5 text-[0.82rem] font-semibold text-emerald-500 shrink-0">
+                    <span className="relative flex h-2 w-2">
+                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                         <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+                    </span>
+                    Live
+               </span>
+          );
      }
-
-     const now = audioContext.currentTime;
-
-     const clickOscillator = audioContext.createOscillator();
-     const clickGain = audioContext.createGain();
-     const clickFilter = audioContext.createBiquadFilter();
-
-     clickOscillator.type = "square";
-     clickOscillator.frequency.setValueAtTime(2400, now);
-     clickOscillator.frequency.exponentialRampToValueAtTime(1400, now + 0.012);
-
-     clickFilter.type = "highpass";
-     clickFilter.frequency.setValueAtTime(1800, now);
-
-     clickGain.gain.setValueAtTime(0.0001, now);
-     clickGain.gain.exponentialRampToValueAtTime(0.14, now + 0.002);
-     clickGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.022);
-
-     clickOscillator.connect(clickFilter);
-     clickFilter.connect(clickGain);
-     clickGain.connect(audioContext.destination);
-
-     const bufferSize = Math.floor(audioContext.sampleRate * 0.015);
-     const noiseBuffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate);
-     const noiseData = noiseBuffer.getChannelData(0);
-
-     for (let i = 0; i < bufferSize; i += 1) {
-          noiseData[i] = (Math.random() * 2 - 1) * (1 - i / bufferSize);
+     if (status === "Building") {
+          return (
+               <span className="flex items-center gap-1.5 text-[0.82rem] font-semibold text-rose-500 shrink-0">
+                    <span className="relative flex h-2 w-2">
+                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75" />
+                         <span className="relative inline-flex h-2 w-2 rounded-full bg-rose-500" />
+                    </span>
+                    Building
+               </span>
+          );
      }
-
-     const noiseSource = audioContext.createBufferSource();
-     const noiseGain = audioContext.createGain();
-     const noiseFilter = audioContext.createBiquadFilter();
-
-     noiseSource.buffer = noiseBuffer;
-     noiseFilter.type = "highpass";
-     noiseFilter.frequency.setValueAtTime(2500, now);
-     noiseGain.gain.setValueAtTime(0.0001, now);
-     noiseGain.gain.exponentialRampToValueAtTime(0.08, now + 0.001);
-     noiseGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.018);
-
-     noiseSource.connect(noiseFilter);
-     noiseFilter.connect(noiseGain);
-     noiseGain.connect(audioContext.destination);
-
-     clickOscillator.start(now);
-     clickOscillator.stop(now + 0.025);
-     noiseSource.start(now);
-     noiseSource.stop(now + 0.018);
-}
-
-function playPageTurnSound() {
-     const AudioContextClass =
-          window.AudioContext ||
-          (window as Window & typeof globalThis & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
-     const audioContext = AudioContextClass ? new AudioContextClass() : null;
-
-     if (!audioContext) return;
-
-     if (audioContext.state === "suspended") {
-          void audioContext.resume();
-     }
-
-     const now = audioContext.currentTime;
-     const masterGain = audioContext.createGain();
-     masterGain.gain.setValueAtTime(0.72, now);
-     masterGain.connect(audioContext.destination);
-
-     const connectLayer = (gainNode: GainNode) => {
-          gainNode.connect(masterGain);
-     };
-
-     // Soft airy sweep — clean premium whoosh.
-     const sweepDuration = 0.32;
-     const sweepBufferSize = Math.floor(audioContext.sampleRate * sweepDuration);
-     const sweepBuffer = audioContext.createBuffer(1, sweepBufferSize, audioContext.sampleRate);
-     const sweepData = sweepBuffer.getChannelData(0);
-
-     for (let i = 0; i < sweepBufferSize; i += 1) {
-          const progress = i / sweepBufferSize;
-          const envelope = Math.pow(1 - progress, 2.2);
-          sweepData[i] = (Math.random() * 2 - 1) * envelope * 0.42;
-     }
-
-     const sweepSource = audioContext.createBufferSource();
-     sweepSource.buffer = sweepBuffer;
-
-     const sweepFilter = audioContext.createBiquadFilter();
-     sweepFilter.type = "lowpass";
-     sweepFilter.frequency.setValueAtTime(5200, now);
-     sweepFilter.frequency.exponentialRampToValueAtTime(980, now + sweepDuration);
-     sweepFilter.Q.setValueAtTime(0.55, now);
-
-     const sweepGain = audioContext.createGain();
-     sweepGain.gain.setValueAtTime(0.0001, now);
-     sweepGain.gain.exponentialRampToValueAtTime(0.09, now + 0.018);
-     sweepGain.gain.exponentialRampToValueAtTime(0.0001, now + sweepDuration);
-
-     sweepSource.connect(sweepFilter);
-     sweepFilter.connect(sweepGain);
-     connectLayer(sweepGain);
-
-     // Warm tonal lift — subtle depth on expand.
-     const bodyOscillator = audioContext.createOscillator();
-     bodyOscillator.type = "sine";
-     bodyOscillator.frequency.setValueAtTime(220, now);
-     bodyOscillator.frequency.exponentialRampToValueAtTime(360, now + 0.09);
-     bodyOscillator.frequency.exponentialRampToValueAtTime(260, now + 0.24);
-
-     const bodyGain = audioContext.createGain();
-     bodyGain.gain.setValueAtTime(0.0001, now);
-     bodyGain.gain.exponentialRampToValueAtTime(0.045, now + 0.025);
-     bodyGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.28);
-
-     bodyOscillator.connect(bodyGain);
-     connectLayer(bodyGain);
-
-     // Glass accent — short high shimmer for a luxe finish.
-     const shimmerOscillator = audioContext.createOscillator();
-     shimmerOscillator.type = "sine";
-     shimmerOscillator.frequency.setValueAtTime(1320, now + 0.03);
-     shimmerOscillator.frequency.exponentialRampToValueAtTime(980, now + 0.14);
-
-     const shimmerGain = audioContext.createGain();
-     shimmerGain.gain.setValueAtTime(0.0001, now + 0.03);
-     shimmerGain.gain.exponentialRampToValueAtTime(0.018, now + 0.05);
-     shimmerGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.16);
-
-     shimmerOscillator.connect(shimmerGain);
-     connectLayer(shimmerGain);
-
-     // Gentle body tap — barely-there thump for weight.
-     const tapOscillator = audioContext.createOscillator();
-     tapOscillator.type = "sine";
-     tapOscillator.frequency.setValueAtTime(92, now);
-     tapOscillator.frequency.exponentialRampToValueAtTime(68, now + 0.08);
-
-     const tapGain = audioContext.createGain();
-     tapGain.gain.setValueAtTime(0.0001, now);
-     tapGain.gain.exponentialRampToValueAtTime(0.028, now + 0.012);
-     tapGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.1);
-
-     tapOscillator.connect(tapGain);
-     connectLayer(tapGain);
-
-     sweepSource.start(now);
-     sweepSource.stop(now + sweepDuration);
-     bodyOscillator.start(now);
-     bodyOscillator.stop(now + 0.3);
-     shimmerOscillator.start(now + 0.03);
-     shimmerOscillator.stop(now + 0.18);
-     tapOscillator.start(now);
-     tapOscillator.stop(now + 0.12);
-}
-
-type ProjectItemProps = {
-     project: Project;
-     isOpen: boolean;
-     onToggle: () => void;
-     onImageClick: () => void;
-};
-
-function ProjectItem({ project, isOpen, onToggle, onImageClick }: ProjectItemProps) {
      return (
-          <div className="rounded-2xl border border-zinc-200 bg-white p-5 shadow-[0_4px_12px_rgba(24,24,27,0.02)] transition-all duration-200 hover:border-zinc-300 hover:shadow-[0_8px_24px_rgba(24,24,27,0.04)]">
-               <button
-                    type="button"
-                    onClick={onToggle}
-                    className="block w-full text-left focus:outline-hidden"
-                    aria-expanded={isOpen}
-               >
-                    <div className="flex w-full items-start gap-7">
-                         <img
-                              src={project.image}
-                              alt={`${project.title} preview`}
-                              onClick={event => {
-                                   event.stopPropagation();
-                                   onImageClick();
-                              }}
-                              className="mt-0.5 h-12 w-12 shrink-0 cursor-zoom-in rounded-md border border-zinc-200 bg-white object-cover transition-transform hover:scale-[1.03]"
-                         />
-
-                         <div className="flex min-w-0 flex-1 items-start justify-between gap-4">
-                              <div>
-                                   <h3 className="text-[1.35rem] font-semibold leading-tight tracking-tight text-zinc-950">
-                                        {project.title}
-                                   </h3>
-                                   <p className="mt-1 text-[0.88rem] text-zinc-500">{project.dateRange}</p>
-                              </div>
-
-                              <div className="flex shrink-0 items-center gap-3 pt-0.5">
-                                   <a
-                                        href={project.liveUrl}
-                                        target="_blank"
-                                        rel="noreferrer"
-                                        onClick={event => event.stopPropagation()}
-                                        className="text-zinc-400 transition-colors hover:text-zinc-700"
-                                        aria-label={`Open ${project.title}`}
-                                   >
-                                        <Link2 className="h-4 w-4" />
-                                   </a>
-                                   {isOpen ? (
-                                        <ChevronUp className="h-4 w-4 text-zinc-400" />
-                                   ) : (
-                                        <ChevronDown className="h-4 w-4 text-zinc-400" />
-                                   )}
-                              </div>
-                         </div>
-                    </div>
-               </button>
-
-               {isOpen ? (
-                    <div className="mt-4 w-full space-y-4">
-                         <button
-                              type="button"
-                              onClick={event => {
-                                   event.stopPropagation();
-                                   onImageClick();
-                              }}
-                              className="group block w-full overflow-hidden rounded-lg border border-zinc-200 bg-zinc-50 text-left"
-                         >
-                              <img
-                                   src={project.image}
-                                   alt={`${project.title} screenshot`}
-                                   className="h-56 w-full object-cover transition-transform duration-300 group-hover:scale-[1.02] md:h-72"
-                              />
-                              <div className="border-t border-zinc-200 px-3 py-2 text-[0.78rem] font-medium uppercase tracking-[0.15em] text-zinc-500">
-                                   Click to expand image
-                              </div>
-                         </button>
-
-                         <p className="w-full text-[0.95rem] leading-6 text-zinc-900">{project.summary}</p>
-
-                         <ul className="w-full space-y-2.5">
-                              {project.features.map(feature => (
-                                   <li key={feature} className="flex gap-3 text-[0.92rem] leading-6 text-zinc-800">
-                                        <span className="mt-[0.72rem] h-1 w-1 shrink-0 rounded-full bg-zinc-700" />
-                                        <span>{feature}</span>
-                                   </li>
-                              ))}
-                         </ul>
-
-                         <div className="flex w-full flex-wrap gap-2 pt-1">
-                              {project.techStack.map(tag => (
-                                   <span
-                                        key={tag}
-                                        className="inline-flex items-center rounded-lg border border-zinc-200 bg-zinc-50 px-3 py-1 text-[0.78rem] font-semibold text-zinc-700 hover:border-zinc-300 transition-colors"
-                                   >
-                                        {tag}
-                                   </span>
-                              ))}
-                         </div>
-                    </div>
-               ) : null}
-          </div>
+          <span className="flex items-center gap-1.5 text-[0.82rem] font-semibold text-zinc-400 shrink-0">
+               <span className="h-2 w-2 rounded-full bg-zinc-400" />
+               {status}
+          </span>
      );
 }
 
-export function ProjectSection({ isFullPage = false }: { isFullPage?: boolean }) {
+function ProjectCard({ project }: { project: Project }) {
+     return (
+          <motion.a
+               href={`#/project/${project.slug}`}
+               initial="initial"
+               whileHover="hover"
+               variants={{
+                    initial: { y: 0 },
+                    hover: { y: -8, transition: { duration: 0.25, ease: "easeOut" } }
+               }}
+               className="group flex flex-col rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-zinc-200/20 dark:hover:shadow-zinc-900/20 hover:border-zinc-300 dark:hover:border-zinc-700 cursor-pointer"
+          >
+               {/* Image Frame */}
+               <div className="relative overflow-hidden bg-zinc-100 dark:bg-zinc-900 aspect-[16/9] border-b border-zinc-100 dark:border-zinc-800/80">
+                    {project.badge && (
+                         <div className="absolute top-3 left-3 z-10">
+                              <span className={`px-2.5 py-1 text-[0.72rem] font-semibold rounded-md ${project.badge === "Featured"
+                                        ? "bg-zinc-900/80 text-white backdrop-blur-sm"
+                                        : "bg-zinc-800/70 text-zinc-200 backdrop-blur-sm"
+                                   }`}>
+                                   {project.badge}
+                              </span>
+                         </div>
+                    )}
+                    <motion.img
+                         src={project.image}
+                         alt={`${project.title} preview`}
+                         variants={{
+                              initial: { scale: 1 },
+                              hover: { scale: 1.04, transition: { duration: 0.25, ease: "easeOut" } }
+                         }}
+                         className="w-full h-full object-cover"
+                    />
+               </div>
+
+               {/* Card Body */}
+               <div className="flex flex-col flex-1 p-6 gap-4">
+                    <div className="flex items-start justify-between gap-3">
+                         <div className="min-w-0">
+                              <h3 className="text-[1.1rem] font-bold tracking-tight text-zinc-950 dark:text-zinc-50 leading-tight">
+                                   {project.title}
+                              </h3>
+                              <p className="mt-1.5 text-[0.86rem] leading-5 text-zinc-500 line-clamp-2">
+                                   {project.summary}
+                              </p>
+                         </div>
+                         <StatusDot status={project.status} />
+                    </div>
+
+                    <div className="flex items-center justify-between mt-auto pt-2 border-t border-zinc-100 dark:border-zinc-800">
+                         <span className="inline-flex items-center gap-1 text-[0.86rem] font-semibold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition-colors">
+                              View Project
+                              {project.status === "Building" || project.badge === "Coming Soon" ? (
+                                   <ArrowUpRight className="h-3.5 w-3.5" />
+                              ) : (
+                                   <span className="inline-block transition-transform group-hover:translate-x-0.5">→</span>
+                              )}
+                         </span>
+                         <span className="text-[0.75rem] text-zinc-400">{project.dateRange}</span>
+                    </div>
+               </div>
+          </motion.a>
+     );
+}
+
+const INITIAL_VISIBLE = 4;
+
+type ProjectSectionProps = {
+     isFullPage?: boolean;
+};
+
+export function ProjectSection({ isFullPage = false }: ProjectSectionProps) {
      const [copied, setCopied] = useState(false);
-     const [expandedIndex, setExpandedIndex] = useState<number | null>(0);
      const [showAll, setShowAll] = useState(false);
-     const [previewProjectIndex, setPreviewProjectIndex] = useState<number | null>(null);
- 
-     const visibleProjects = isFullPage ? projects : (showAll ? projects : projects.slice(0, INITIAL_VISIBLE));
+
+     const visibleProjects = isFullPage
+          ? projects
+          : showAll
+               ? projects
+               : projects.slice(0, INITIAL_VISIBLE);
+
      const hasHiddenProjects = !isFullPage && projects.length > INITIAL_VISIBLE;
- 
+
      const copySectionLink = async () => {
           const shareUrl = `${window.location.origin}/#projects`;
- 
           try {
                await navigator.clipboard.writeText(shareUrl);
                setCopied(true);
                window.setTimeout(() => setCopied(false), 1200);
           } catch {
-               // Ignore clipboard failures in unsupported contexts.
+               // ignore
           }
- 
-          playCopySound();
      };
- 
-     const handleProjectToggle = (index: number) => {
-          setExpandedIndex(current => {
-               const isExpanding = current !== index;
-               if (isExpanding) {
-                    playPageTurnSound();
-               }
-               return current === index ? null : index;
-          });
-     };
- 
-     useEffect(() => {
-          if (previewProjectIndex === null) return;
- 
-          const onEscape = (event: KeyboardEvent) => {
-               if (event.key === "Escape") {
-                    setPreviewProjectIndex(null);
-               }
-          };
- 
-          window.addEventListener("keydown", onEscape);
-          return () => window.removeEventListener("keydown", onEscape);
-      }, [previewProjectIndex]);
- 
+
      return (
-          <section className={`relative w-full overflow-hidden bg-white text-zinc-900 ${isFullPage ? "pb-10" : "border-y border-zinc-200 px-10 py-3"}`}>
+          <section
+               className={`relative w-full overflow-hidden bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 ${isFullPage ? "pb-12" : "border-y border-zinc-200 dark:border-zinc-800"
+                    }`}
+          >
+               {/* Decorative grid overlay */}
                <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.04)_1px,transparent_1px)] bg-size-[100%_100%,100%_100%] opacity-40" />
- 
-               {/* Standalone Full-Page Header */}
+
+               {/* Full page header */}
                {isFullPage && (
-                    <div className="relative border-b border-zinc-200 bg-white px-8 py-3 flex justify-between items-center text-zinc-900 mb-6">
+                    <div className="relative border-b border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 px-8 py-3 flex justify-between items-center text-zinc-900 dark:text-zinc-100 mb-6">
                          <div className="flex items-center gap-4">
                               <a
                                    href="#/"
@@ -415,32 +337,14 @@ export function ProjectSection({ isFullPage = false }: { isFullPage?: boolean })
                               >
                                    <ChevronLeft className="h-5 w-5" />
                               </a>
-                              <h2 className="text-[1.35rem] font-bold text-zinc-950 leading-none">
-                                   All Projects
-                              </h2>
-                         </div>
-
-                         <div className="flex items-center gap-2">
-                              <button
-                                   type="button"
-                                   className="px-3 py-1.5 text-[0.8rem] font-semibold text-white bg-zinc-950 hover:bg-zinc-800 rounded-lg transition-colors cursor-pointer flex items-center justify-center tracking-wide"
-                              >
-                                   ⌘ K
-                              </button>
-                              <button
-                                   type="button"
-                                   className="h-8 w-8 rounded-lg bg-zinc-950 flex items-center justify-center hover:bg-zinc-800 transition-colors cursor-pointer text-white"
-                                   aria-label="Toggle theme"
-                              >
-                                   <Sun className="h-4 w-4" />
-                              </button>
+                              <h2 className="text-[1.35rem] font-bold text-zinc-950 dark:text-zinc-50 leading-tight">All Projects</h2>
                          </div>
                     </div>
                )}
 
-               {/* Main Home Page Header */}
+               {/* Main heading */}
                {!isFullPage && (
-                    <div className="relative border-y border-zinc-200 py-1">
+                    <div className="relative border-y border-zinc-200 dark:border-zinc-800 px-6 py-2 mb-0">
                          <button
                               id="projects"
                               type="button"
@@ -448,69 +352,37 @@ export function ProjectSection({ isFullPage = false }: { isFullPage?: boolean })
                               className="group inline-flex items-center gap-3 text-left"
                               aria-label="Copy projects section link"
                          >
-                              <h2 className="text-[2.5rem] font-semibold leading-none tracking-tight text-zinc-950">
+                              <h2 className="text-[2.5rem] font-semibold leading-tight tracking-tight text-zinc-950 dark:text-zinc-50">
                                    Projects{" "}
                                    <span className="text-zinc-400 text-[1.7rem]">({projects.length})</span>
                               </h2>
-                              <Link2 className="h-5 w-5 text-zinc-500 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:text-zinc-800" />
+                              <Link2 className="h-5 w-5 text-zinc-500 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:text-zinc-800 dark:group-hover:text-zinc-200" />
                               <span className="text-[0.7rem] font-medium uppercase tracking-[0.24em] text-zinc-400 transition-opacity duration-200 group-hover:text-zinc-500">
                                    {copied ? "Copied" : " "}
                               </span>
                          </button>
                     </div>
                )}
- 
-               <div className={`relative mt-4 w-full space-y-4 ${isFullPage ? "px-8" : ""}`}>
-                    {visibleProjects.map((project, index) => (
-                         <ProjectItem
-                              key={project.title}
-                              project={project}
-                              isOpen={expandedIndex === index}
-                              onToggle={() => handleProjectToggle(index)}
-                              onImageClick={() => setPreviewProjectIndex(index)}
-                         />
+
+               {/* 2-column project grid */}
+               <div className={`relative grid grid-cols-1 md:grid-cols-2 gap-6 p-6 ${isFullPage ? "md:px-8 max-w-5xl mx-auto" : "md:px-8"}`}>
+                    {visibleProjects.map((project) => (
+                         <ProjectCard key={project.slug} project={project} />
                     ))}
                </div>
- 
-               {hasHiddenProjects && !showAll ? (
-                    <div className="relative mt-8 flex justify-center pb-4">
+
+               {/* View all button */}
+               {hasHiddenProjects && !showAll && (
+                    <div className="relative flex justify-center pb-6 px-4">
                          <a
                               href="#/projects-all"
-                              className="inline-flex items-center gap-2 rounded-xl bg-zinc-950 hover:bg-zinc-800 px-6 py-2.5 text-[0.88rem] font-bold text-white transition-all hover:scale-[1.02] active:scale-[0.98] shadow-sm cursor-pointer"
+                              className="inline-flex items-center gap-2 rounded-xl bg-zinc-950 hover:bg-zinc-800 dark:bg-zinc-900 dark:hover:bg-zinc-800 px-6 py-2.5 text-[0.88rem] font-bold text-white transition-all hover:scale-[1.02] active:scale-[0.98] shadow-sm cursor-pointer"
                          >
                               View All
                               <ArrowUpRight className="h-4 w-4 text-white" />
                          </a>
                     </div>
-               ) : null}
-
-               {previewProjectIndex !== null ? (
-                    <div
-                         className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-4"
-                         role="dialog"
-                         aria-modal="true"
-                         aria-label="Project image preview"
-                         onClick={() => setPreviewProjectIndex(null)}
-                    >
-                         <button
-                              type="button"
-                              className="absolute right-5 top-5 rounded-md border border-white/40 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-white transition-colors hover:border-white hover:bg-white/10"
-                              onClick={event => {
-                                   event.stopPropagation();
-                                   setPreviewProjectIndex(null);
-                              }}
-                         >
-                              Close
-                         </button>
-
-                         <img
-                              src={visibleProjects[previewProjectIndex]?.image}
-                              alt={`${visibleProjects[previewProjectIndex]?.title} full preview`}
-                              className="max-h-[88vh] w-full max-w-5xl rounded-lg border border-white/20 bg-zinc-900 object-contain shadow-2xl"
-                              onClick={event => event.stopPropagation()}
-                         />
-                    </div>
-               ) : null}
+               )}
           </section>
      );
 }

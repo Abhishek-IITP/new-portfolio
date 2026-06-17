@@ -8,6 +8,7 @@ import { TechStack } from "./components/TechStack";
 import { TopInfo } from "./components/Top-Info";
 import { TopVideo } from "./components/TopVideo";
 import { Experience } from "./components/Experience";
+import { ProjectDetail } from "./components/ProjectDetail";
 
 
 export function App() {
@@ -30,7 +31,7 @@ export function App() {
   if (currentRoute === "#/experience-all") {
     return (
       <div className="min-h-screen bg-white dark:bg-zinc-950 text-black dark:text-white transition-colors duration-300">
-        <div className="mx-auto max-w-200 min-h-screen bg-white dark:bg-zinc-950">
+        <div className="mx-auto max-w-5xl min-h-screen bg-white dark:bg-zinc-950">
           <TopVideo />
           <Experience isFullPage={true} />
         </div>
@@ -41,7 +42,7 @@ export function App() {
   if (currentRoute === "#/projects-all") {
     return (
       <div className="min-h-screen bg-white dark:bg-zinc-950 text-black dark:text-white transition-colors duration-300">
-        <div className="mx-auto max-w-200 min-h-screen bg-white dark:bg-zinc-950">
+        <div className="mx-auto max-w-5xl min-h-screen bg-white dark:bg-zinc-950">
           <TopVideo />
           <ProjectSection isFullPage={true} />
         </div>
@@ -49,9 +50,22 @@ export function App() {
     );
   }
 
+  // Dynamic project detail pages: #/project/:slug
+  if (currentRoute.startsWith("#/project/")) {
+    const slug = currentRoute.replace("#/project/", "");
+    return (
+      <div className="min-h-screen bg-white dark:bg-zinc-950 text-black dark:text-white transition-colors duration-300">
+        <div className="mx-auto max-w-5xl min-h-screen bg-white dark:bg-zinc-950">
+          <TopVideo />
+          <ProjectDetail slug={slug} />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-white dark:bg-zinc-950 text-black dark:text-white transition-colors duration-300">
-      <div className="mx-auto max-w-230">
+      <div className="mx-auto max-w-5xl">
         <TopVideo />
         <TopInfo />
         <BreifDetail />

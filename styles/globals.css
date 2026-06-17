@@ -62,18 +62,19 @@ body {
 }
 
 .dark {
-  background-color: #09090b !important;
+  background-color: #0c0c0e !important;
 }
 
 .dark body,
 .dark #root,
 .dark .bg-zinc-950 {
-  background-color: #09090b !important;
+  background-color: #0c0c0e !important;
 }
 
-.dark section:not(.rounded-2xl):not(.rounded-3xl):not(.rounded-xl),
+.dark section:not([class*="rounded-"]),
+.dark .mx-auto.max-w-200.min-h-screen.bg-white,
 .dark .relative.border-b.border-zinc-200.bg-white {
-  background-color: #09090b !important;
+  background-color: #0c0c0e !important;
 }
 
 .dark .bg-white {
@@ -81,7 +82,7 @@ body {
 }
 
 .dark .bg-zinc-50 {
-  background-color: #09090b !important;
+  background-color: #141417 !important;
 }
 
 .dark .bg-zinc-100 {
@@ -102,8 +103,17 @@ body {
   }
   
   .border-zinc-200,
-  .border-zinc-300 {
-    border-color: #27272a !important;
+  .border-zinc-300,
+  .border-zinc-100,
+  .border-b,
+  .border-t,
+  .border-y,
+  .border,
+  .divide-zinc-200,
+  .divide-zinc-200 > *,
+  [class*="border-zinc-"],
+  [class*="divide-zinc-"] {
+    border-color: #1c1c1f !important;
   }
   
   .hover\:bg-zinc-50:hover {
@@ -113,7 +123,7 @@ body {
     background-color: #27272a !important;
   }
   .hover\:border-zinc-300:hover {
-    border-color: #3f3f46 !important;
+    border-color: #27272a !important;
   }
 }
 
