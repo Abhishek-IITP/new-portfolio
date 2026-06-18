@@ -6,7 +6,7 @@ const outdir = path.join(process.cwd(), "dist");
 await rm(outdir, { recursive: true, force: true });
 
 console.log("Building Tailwind CSS...");
-spawnSync("bunx", ["tailwindcss", "-i", "styles/globals.css", "-o", "styles/tailwind-built.css", "--minify"], {
+spawnSync("bunx", ["@tailwindcss/cli", "-i", "styles/globals.css", "-o", "styles/tailwind-built.css", "--minify"], {
   stdio: "inherit",
   shell: true
 });
