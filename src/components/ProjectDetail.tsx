@@ -45,8 +45,7 @@ function getTechLogoUrl(tech: string): string {
   const slug = logoMapping[key] || key.replace(/[^a-z0-9]/g, "");
   return `https://cdn.simpleicons.org/${slug}/000000`;
 }
-
-// Inline GitHub SVG since lucide-react doesn't ship Github icon in this version
+ 
 function GithubIcon({ className }: { className?: string }) {
   return (
     <svg
@@ -109,9 +108,9 @@ export function ProjectDetail({ slug }: ProjectDetailProps) {
         </div>
       </div>
 
-      {/* Main Content */}
+     
       <div className="px-6 sm:px-8 mt-6 space-y-6">
-        {/* Hero Image */}
+      
         <div className="relative w-full overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 shadow-[0_4px_24px_rgba(0,0,0,0.06)]">
           <img
             src={project.image}
@@ -120,9 +119,9 @@ export function ProjectDetail({ slug }: ProjectDetailProps) {
           />
         </div>
 
-        {/* Action & Meta Bar */}
+        
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 py-2">
-          {/* Action Buttons */}
+          
           <div className="flex items-center gap-2.5 flex-wrap">
             <a
               href={project.liveUrl}
@@ -144,7 +143,7 @@ export function ProjectDetail({ slug }: ProjectDetailProps) {
             </a>
           </div>
 
-          {/* Meta Info */}
+          
           <div className="flex items-center gap-4 text-[0.8rem] text-zinc-500 flex-wrap">
             <span className="font-medium">{project.dateRange}</span>
             {project.badge && (
@@ -161,10 +160,10 @@ export function ProjectDetail({ slug }: ProjectDetailProps) {
           </div>
         </div>
 
-        {/* Divider */}
+         
         <div className="border-t border-zinc-100" />
 
-        {/* About Section */}
+        
         <div className="space-y-5">
           <div>
             <p className="text-[0.65rem] font-semibold uppercase tracking-[0.32em] text-zinc-400 mb-2">
@@ -185,7 +184,7 @@ export function ProjectDetail({ slug }: ProjectDetailProps) {
           </ul>
         </div>
 
-        {/* Tech Stack */}
+         
         <div className="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 p-5">
           <p className="text-[0.65rem] font-semibold uppercase tracking-[0.32em] text-zinc-400 mb-4">
             Tech Stack

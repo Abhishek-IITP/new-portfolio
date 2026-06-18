@@ -24,7 +24,6 @@ export function AboutSection() {
                setCopied(true);
                window.setTimeout(() => setCopied(false), 1200);
           } catch {
-               // Ignore clipboard failures in unsupported contexts.
           }
 
           const AudioContextClass = window.AudioContext || (window as Window & typeof globalThis & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;

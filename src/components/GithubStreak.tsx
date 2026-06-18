@@ -7,9 +7,9 @@ export function GithubStreak() {
                     <h2 className="text-[2.5rem] font-bold leading-none tracking-tight text-zinc-950">
                          GitHub
                     </h2>
-                    <span className="text-xs font-semibold uppercase tracking-[0.24em] text-zinc-500">
+                    <a  href="https://github.com/abhishek-IITP" target="_blank" className="text-xs border-b-1 font-semibold uppercase tracking-[0.24em] text-zinc-500">
                          @{githubUser}
-                    </span>
+                    </a>
                </div>
 
                <div className="mt-6 min-w-full overflow-x-auto rounded-2xl border border-zinc-200 bg-white p-4 sm:p-6 shadow-sm">

@@ -9,6 +9,7 @@ import { TopInfo } from "./components/Top-Info";
 import { TopVideo } from "./components/TopVideo";
 import { Experience } from "./components/Experience";
 import { ProjectDetail } from "./components/ProjectDetail";
+import { QuoteSection } from "./components/QuoteSection";
 
 
 export function App() {
@@ -74,6 +75,7 @@ export function App() {
         <Experience />
         <ProjectSection />
         <GithubStreak />
+        <QuoteSection/>
       </div>
     </div>
   );

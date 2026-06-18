@@ -6,7 +6,7 @@ import ThemeToggle from "./ThemeToggle";
 
 const roles = [
      "Software Engineer",
-     "Full Stack Dev",
+     "Full Stack Developer",
      "Trader",
      "Open Source Contributor",
 ];

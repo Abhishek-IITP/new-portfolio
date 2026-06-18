@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { ChevronDown, ChevronUp, Link2, ArrowUpRight, ChevronLeft, Sun } from "lucide-react";
+import { ChevronDown, ChevronUp, Link2, ArrowUpRight, ChevronLeft } from "lucide-react";
+import ThemeToggle from "./ThemeToggle";
 
 import deccanLogo from "../public/ai_deccan_logo.jpg";
 import dhruvLogo from "../public/dhruv.jpeg";
@@ -62,16 +63,16 @@ const timelineData = [
     technologies: [
       "Python",
       "Machine Learning",
-      "GWO",
-      "ELM",
       "Decision Tree",
-      "Random Forest"
+      "Extreme Learning Machine",
+      "Salp Swarm Algorithm",
+      "Honey Badger Algorithm"
     ],
     bullets: [
-      "Conducted research on Brain Tumor Detection under Dr. Parijata Majumdar.",
-      "Integrated Grey Wolf Optimizer (GWO) with Extreme Learning Machine (ELM) for feature selection and classification.",
-      "Evaluated Decision Tree and Random Forest models for performance optimization.",
-      "Contributed toward a potential SCI/IEEE research publication."
+      "Conducted research on Brain Tumor Detection under the guidance of Dr. Parijata Majumdar.",
+      "Designed a hybrid machine learning framework integrating Decision Tree (DT) and Extreme Learning Machine (ELM) classifiers for medical image-based tumor prediction.",
+      "Applied Salp Swarm Algorithm (SSA) for feature selection and Honey Badger Algorithm (HBA) for hyperparameter optimization to improve model accuracy and generalization.",
+      "Contributed to a research study focused on optimization-driven brain tumor diagnosis, targeting publication in reputed journals."
     ]
   },
 
@@ -101,7 +102,7 @@ const timelineData = [
     id: "iit-patna",
     type: "education",
     company: "Indian Institute of Technology Patna",
-    role: "B.Sc. Computer Science & Data Analytics",
+    role: "B.S Computer Science & Data Analytics",
     location: "Patna, India",
     duration: "2023 - 2027",
     logo: iitpLogo,
@@ -121,7 +122,7 @@ const timelineData = [
     logo: nspsLogo,
     technologies: ["Physics", "Chemistry", "Mathematics"],
     bullets: [
-      "Graduated with 91% marks."
+      "Scored 91% marks in PCM."
     ]
   }
 ];
@@ -270,7 +271,7 @@ function ExperienceItem({ item, isOpen, onToggle }: ExperienceItemProps) {
       >
         <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-5 w-full">
           {/* Company/School Logo Box */}
-          <div className="h-14 w-14 rounded-2xl border border-zinc-200 bg-white flex items-center justify-center p-1.5 shrink-0 shadow-xs">
+          <div className="h-14 w-14 rounded-2xl border border-zinc-200 bg-white flex items-center justify-center p-1.5  shadow-xs">
             <img
               src={item.logo}
               alt={`${item.company} logo`}
@@ -306,7 +307,6 @@ function ExperienceItem({ item, isOpen, onToggle }: ExperienceItemProps) {
           </div>
         </div>
 
-        {/* Arrow/Chevron Indicator */}
         <div className="flex justify-end mt-2 sm:-mt-1 text-zinc-400">
           {isOpen ? (
             <ChevronUp className="h-5 w-5 hover:text-zinc-600 transition-colors" />
@@ -319,7 +319,7 @@ function ExperienceItem({ item, isOpen, onToggle }: ExperienceItemProps) {
       {/* Expanded Details Section */}
       {isOpen && (
         <div className="mt-4 pt-4 border-t border-zinc-100 space-y-4">
-          {/* Bullets List */}
+
           <ul className="space-y-3">
             {item.bullets.map((bullet, idx) => (
               <li key={idx} className="flex gap-3 text-[0.92rem] leading-6 text-zinc-600">
@@ -329,7 +329,6 @@ function ExperienceItem({ item, isOpen, onToggle }: ExperienceItemProps) {
             ))}
           </ul>
 
-          {/* Technologies Tag Badges */}
           <div className="flex flex-wrap gap-2 pt-1">
             {item.technologies.map(tech => (
               <span
@@ -368,7 +367,6 @@ export function Experience({ isFullPage = false }: ExperienceProps) {
       setCopied(true);
       window.setTimeout(() => setCopied(false), 1200);
     } catch {
-      // Ignore clipboard failures in unsupported contexts.
     }
 
     playCopySound();
@@ -385,14 +383,10 @@ export function Experience({ isFullPage = false }: ExperienceProps) {
   };
 
   return (
-    <section className={`relative w-full overflow-hidden bg-white text-zinc-900 ${isFullPage ? "pb-10" : "border-y border-zinc-200 px-8 py-3"}`}>
-      {/* Decorative Grid Overlay */}
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.04)_1px,transparent_1px)] bg-size-[100%_100%,100%_100%] opacity-40" />
-
-      {/* Standalone Full-Page Header */}
+    <>
       {isFullPage && (
-        <div className="relative border-b border-zinc-200 bg-white px-8 py-3 flex justify-between items-center text-zinc-900 mb-6">
-          <div className="flex items-center gap-4">
+        <div className="border-b border-zinc-200 dark:border-zinc-800 bg-white/90 dark:bg-zinc-950/90 px-6 sm:px-8 py-3 flex justify-between items-center sticky top-0 z-20 backdrop-blur-sm">
+          <div className="flex items-center gap-3 sm:gap-4">
             <a
               href="#/"
               className="h-8 w-8 rounded-lg bg-zinc-950 flex items-center justify-center hover:bg-zinc-800 transition-all cursor-pointer text-white hover:scale-[1.05]"
@@ -400,30 +394,28 @@ export function Experience({ isFullPage = false }: ExperienceProps) {
             >
               <ChevronLeft className="h-5 w-5" />
             </a>
-            <h2 className="text-[1.35rem] font-bold text-zinc-950 leading-none">
+            <h2 className="text-[1.1rem] sm:text-[1.35rem] font-bold text-zinc-950 dark:text-zinc-100 leading-tight">
               All Experiences
             </h2>
           </div>
 
           <div className="flex items-center gap-2">
-            <button
-              type="button"
-              className="px-3 py-1.5 text-[0.8rem] font-semibold text-white bg-zinc-950 hover:bg-zinc-800 rounded-lg transition-colors cursor-pointer flex items-center justify-center tracking-wide"
+            <a
+              href="#/"
+              className="hidden sm:flex px-3 py-1.5 text-[0.8rem] font-semibold text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700 hover:border-zinc-300 dark:hover:border-zinc-600 hover:bg-zinc-50 dark:hover:bg-zinc-800 rounded-lg transition-colors cursor-pointer items-center justify-center tracking-wide"
             >
-              ⌘ K
-            </button>
-            <button
-              type="button"
-              className="h-8 w-8 rounded-lg bg-zinc-950 flex items-center justify-center hover:bg-zinc-800 transition-colors cursor-pointer text-white"
-              aria-label="Toggle theme"
-            >
-              <Sun className="h-4 w-4" />
-            </button>
+              Back to Home
+            </a>
+            <ThemeToggle />
           </div>
         </div>
       )}
 
-      {/* Main Home Page Header */}
+      <section className={`relative w-full overflow-hidden bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 ${isFullPage ? "pb-10" : "border-y border-zinc-200 px-8 py-3"}`}>
+        
+        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.04)_1px,transparent_1px)] bg-size-[100%_100%,100%_100%] opacity-40" />
+
+      
       {!isFullPage && (
         <div className="relative border-y border-zinc-200 py-1 mb-6">
           <button
@@ -445,7 +437,7 @@ export function Experience({ isFullPage = false }: ExperienceProps) {
         </div>
       )}
 
-      {/* Timeline Cards Container */}
+       
       <div className={`relative w-full space-y-4 ${isFullPage ? "px-8" : ""}`}>
         {visibleTimeline.map((item, index) => (
           <ExperienceItem
@@ -457,18 +449,19 @@ export function Experience({ isFullPage = false }: ExperienceProps) {
         ))}
       </div>
 
-      {/* View All Button styled to match mockup */}
-      {hasHiddenItems && !showAll ? (
-        <div className="relative mt-8 flex justify-center pb-4">
-          <a
-            href="#/experience-all"
-            className="inline-flex items-center gap-2 rounded-xl bg-zinc-950 hover:bg-zinc-800 px-6 py-2.5 text-[0.88rem] font-bold text-white transition-all hover:scale-[1.02] active:scale-[0.98] shadow-sm cursor-pointer"
-          >
-            View All
-            <ArrowUpRight className="h-4 w-4 text-white" />
-          </a>
-        </div>
-      ) : null}
-    </section>
+         
+        {hasHiddenItems && !showAll ? (
+          <div className="relative mt-8 flex justify-center pb-4">
+            <a
+              href="#/experience-all"
+              className="inline-flex items-center gap-2 rounded-xl bg-zinc-950 hover:bg-zinc-800 px-6 py-2.5 text-[0.88rem] font-bold text-white transition-all hover:scale-[1.02] active:scale-[0.98] shadow-sm cursor-pointer"
+            >
+              View All
+              <ArrowUpRight className="h-4 w-4 text-white" />
+            </a>
+          </div>
+        ) : null}
+      </section>
+    </>
   );
 }

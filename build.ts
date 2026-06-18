@@ -1,16 +1,21 @@
-import tailwind from "bun-plugin-tailwind";
 import { rm } from "node:fs/promises";
 import path from "node:path";
+import { spawnSync } from "child_process";
 
 const outdir = path.join(process.cwd(), "dist");
 await rm(outdir, { recursive: true, force: true });
+
+console.log("Building Tailwind CSS...");
+spawnSync("bunx", ["tailwindcss", "-i", "styles/globals.css", "-o", "styles/tailwind-built.css", "--minify"], {
+  stdio: "inherit",
+  shell: true
+});
 
 const entrypoints = [...new Bun.Glob("src/**/*.html").scanSync()];
 
 const result = await Bun.build({
   entrypoints,
   outdir,
-  plugins: [tailwind],
   minify: true,
   target: "browser",
   sourcemap: "linked",
