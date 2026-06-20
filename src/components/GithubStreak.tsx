@@ -7,7 +7,7 @@ export function GithubStreak() {
                     <h2 className="text-[2.5rem] font-bold leading-none tracking-tight text-zinc-950">
                          GitHub
                     </h2>
-                    <a  href="https://github.com/abhishek-IITP" target="_blank" className="text-xs border-b-1 font-semibold uppercase tracking-[0.24em] text-zinc-500">
+                    <a href="https://github.com/abhishek-IITP" target="_blank" className="text-xs border-b-1 font-semibold uppercase tracking-[0.24em] text-zinc-500">
                          @{githubUser}
                     </a>
                </div>
@@ -17,7 +17,7 @@ export function GithubStreak() {
                          <img
                               src={`https://ghchart.rshah.org/000000/${githubUser}`}
                               alt={`${githubUser} GitHub contributions chart`}
-                              className="block h-auto w-full dark:invert"
+                              className="block h-auto w-full rounded-lg dark:invert"
                          />
                     </div>
                </div>
@@ -27,11 +27,11 @@ export function GithubStreak() {
                     <div className="flex items-center gap-2">
                          <span>Less</span>
                          <span className="flex gap-1.5">
-                              <span className="h-3.5 w-3.5 rounded-xs border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800" />
-                              <span className="h-3.5 w-3.5 rounded-xs border border-zinc-200 dark:border-zinc-800 bg-zinc-300 dark:bg-zinc-600" />
-                              <span className="h-3.5 w-3.5 rounded-xs border border-zinc-200 dark:border-zinc-800 bg-zinc-400 dark:bg-zinc-500" />
-                              <span className="h-3.5 w-3.5 rounded-xs border border-zinc-200 dark:border-zinc-800 bg-zinc-600 dark:bg-zinc-300" />
-                              <span className="h-3.5 w-3.5 rounded-xs border border-zinc-200 dark:border-zinc-800 bg-zinc-950 dark:bg-zinc-100" />
+                              <span className="h-3.5 w-3.5 rounded-s border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800" />
+                              <span className="h-3.5 w-3.5 rounded-s border border-zinc-200 dark:border-zinc-800 bg-zinc-300 dark:bg-zinc-600" />
+                              <span className="h-3.5 w-3.5 rounded-s border border-zinc-200 dark:border-zinc-800 bg-zinc-400 dark:bg-zinc-500" />
+                              <span className="h-3.5 w-3.5 rounded-s border border-zinc-200 dark:border-zinc-800 bg-zinc-600 dark:bg-zinc-300" />
+                              <span className="h-3.5 w-3.5 rounded-s border border-zinc-200 dark:border-zinc-800 bg-zinc-950 dark:bg-zinc-100" />
                          </span>
                          <span>More</span>
                     </div>
