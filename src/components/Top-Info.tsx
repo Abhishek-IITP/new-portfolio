@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Command } from "lucide-react";
 import meImage from "../public/me.jpg";
 import "./Top-Info.css";
 import ThemeToggle from "./ThemeToggle";
@@ -11,7 +12,7 @@ const roles = [
      "Open Source Contributor",
 ];
 
-export function TopInfo() {
+export function TopInfo({ onOpenSearch }: { onOpenSearch?: () => void }) {
      const [roleIndex, setRoleIndex] = useState(0);
 
      useEffect(() => {
@@ -52,9 +53,19 @@ export function TopInfo() {
                     </div>
                </div>
 
-               <div className="sm:mb-2 self-center sm:self-end">
+               <div className="sm:mb-2 self-center sm:self-end flex items-center gap-2">
+                    {/* ⌘K Search Button */}
+                    <button
+                         onClick={onOpenSearch}
+                         className="inline-flex items-center justify-center gap-2 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-4 h-14 text-sm font-medium text-zinc-600 dark:text-zinc-300 shadow-[0_4px_12px_rgba(0,0,0,0.05)] hover:bg-zinc-50 dark:hover:bg-zinc-800/80 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all duration-200 active:scale-95 cursor-pointer"
+                         aria-label="Open command palette"
+                    >
+                         <Command className="h-5 w-5" />
+                         <span className="font-bold">K</span>
+                    </button>
                     <ThemeToggle />
                </div>
           </div>
      );
 }
+

@@ -25,6 +25,10 @@
 
 html,
 body {
+  background-color: #fafafa;
+  color: #18181b;
+  background-image: radial-gradient(circle, #d4d4d8 1px, transparent 1px);
+  background-size: 24px 24px;
   transition:
     background-color 0.35s ease,
     color 0.35s ease;
@@ -35,6 +39,12 @@ body {
     background-color 0.35s ease,
     color 0.35s ease,
     border-color 0.35s ease;
+}
+
+/* Disable heavy theme transitions inside the command palette for instant rendering */
+[data-cmd-palette] *,
+[data-cmd-palette] {
+  transition: none !important;
 }
 
 .toggling-theme,
@@ -63,10 +73,20 @@ body {
 
 .dark {
   background-color: #0c0c0e !important;
+  background-image: radial-gradient(circle, #27272a 1px, transparent 1px) !important;
+  background-size: 24px 24px !important;
 }
 
-.dark body,
-.dark #root,
+.dark body {
+  background-color: #0c0c0e !important;
+  background-image: radial-gradient(circle, #27272a 1px, transparent 1px) !important;
+  background-size: 24px 24px !important;
+}
+
+.dark #root {
+  background-color: transparent !important;
+}
+
 .dark .bg-zinc-950 {
   background-color: #0c0c0e !important;
 }
@@ -78,7 +98,7 @@ body {
 }
 
 .dark .bg-white {
-  background-color: #000000 !important;
+  background-color: #0c0c0e !important;
 }
 
 .dark .bg-zinc-50 {
