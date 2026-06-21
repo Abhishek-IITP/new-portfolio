@@ -10,6 +10,7 @@ import { TopVideo } from "./components/TopVideo";
 import { Experience } from "./components/Experience";
 import { ProjectDetail } from "./components/ProjectDetail";
 import { QuoteSection } from "./components/QuoteSection";
+import { Footer } from "./components/Footer";
 import { Sidebar } from "./components/Sidebar";
 import { CommandPalette, useCommandPalette } from "./components/CommandPalette";
 
@@ -91,6 +92,7 @@ export function App() {
           <GithubStreak />
         </div>
         <QuoteSection/>
+        <Footer />
         <Sidebar onOpenSearch={cmdPalette.open} />
       </div>
       <CommandPalette isOpen={cmdPalette.isOpen} onClose={cmdPalette.close} />
