@@ -71,15 +71,45 @@ export function CommandPalette({ isOpen, onClose }: { isOpen: boolean; onClose: 
      // Build all searchable items
      const allItems = useMemo<SearchItem[]>(() => {
           const scrollTo = (id: string) => {
-               const el = document.getElementById(id);
-               if (el) {
-                    const targetY = el.getBoundingClientRect().top + window.scrollY;
-                    animate(window.scrollY, targetY, {
-                         type: "tween",
-                         ease: [0.25, 1, 0.5, 1],
-                         duration: 0.8,
-                         onUpdate: (v) => window.scrollTo(0, v),
-                    });
+               const currentHash = window.location.hash || "#/";
+               const isOnLandingPage =
+                    currentHash === "#/" ||
+                    currentHash === "#" ||
+                    currentHash === "" ||
+                    currentHash === "#home" ||
+                    currentHash === "#about" ||
+                    currentHash === "#experience" ||
+                    currentHash === "#projects" ||
+                    currentHash === "#github";
+
+               if (!isOnLandingPage) {
+                    // Navigate back to the landing page first
+                    window.location.hash = "#/";
+                    
+                    // Wait for React routing and DOM mounting to complete
+                    setTimeout(() => {
+                         const el = document.getElementById(id);
+                         if (el) {
+                              const targetY = el.getBoundingClientRect().top + window.scrollY;
+                              animate(window.scrollY, targetY, {
+                                   type: "tween",
+                                   ease: [0.25, 1, 0.5, 1],
+                                   duration: 0.8,
+                                   onUpdate: (v) => window.scrollTo(0, v),
+                              });
+                         }
+                    }, 250);
+               } else {
+                    const el = document.getElementById(id);
+                    if (el) {
+                         const targetY = el.getBoundingClientRect().top + window.scrollY;
+                         animate(window.scrollY, targetY, {
+                              type: "tween",
+                              ease: [0.25, 1, 0.5, 1],
+                              duration: 0.8,
+                              onUpdate: (v) => window.scrollTo(0, v),
+                         });
+                    }
                }
           };
 
