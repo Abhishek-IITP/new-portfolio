@@ -1,2 +1,6 @@
-/* Styles for Top-Info are now managed via Tailwind and Framer Motion */
-
+/* Styling for TopInfo squircle layout */
+
+/* Override ThemeToggle to be a squircle/rounded-2xl */
+.theme-toggle {
+  border-radius: 1rem !important; /* matches rounded-2xl */
+}
