@@ -13,6 +13,7 @@ export function Footer() {
         src={footerLightImage}
         alt=""
         aria-hidden="true"
+        loading="lazy"
         className={`
           absolute inset-0 w-full h-full object-cover object-center
           transition-opacity duration-500 ease-in-out
@@ -24,6 +25,7 @@ export function Footer() {
         src={footerDarkImage}
         alt=""
         aria-hidden="true"
+        loading="lazy"
         className={`
           absolute inset-0 w-full h-full object-cover object-center
           transition-opacity duration-500 ease-in-out

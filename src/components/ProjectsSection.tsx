@@ -317,6 +317,7 @@ function ProjectCard({ project }: { project: Project }) {
                     <motion.img
                          src={project.image}
                          alt={`${project.title} preview`}
+                         loading="lazy"
                          variants={{
                               initial: { scale: 1 },
                               hover: { scale: 1.04, transition: { duration: 0.25, ease: "easeOut" } }
