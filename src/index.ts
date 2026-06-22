@@ -21,6 +21,33 @@ const server = serve({
       },
     },
 
+    "/api/views": {
+      async GET(req) {
+        let views = 452;
+        try {
+          const file = Bun.file("views.txt");
+          if (await file.exists()) {
+            const content = await file.text();
+            const parsed = parseInt(content.trim(), 10);
+            if (!isNaN(parsed)) {
+              views = parsed;
+            }
+          }
+        } catch (e) {
+          // ignore
+        }
+        
+        views += 1;
+        
+        try {
+          await Bun.write("views.txt", views.toString());
+        } catch (e) {
+          // ignore
+        }
+        
+        return Response.json({ views });
+      }
+    },
     "/api/hello/:name": async req => {
       const name = req.params.name;
       return Response.json({
