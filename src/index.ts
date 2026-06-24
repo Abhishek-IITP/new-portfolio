@@ -36,7 +36,10 @@ const server = serve({
     // 3. Views Counter API
     "/api/views": {
       async GET(req) {
-        let views = 452;
+        const url = new URL(req.url);
+        const shouldIncrement = url.searchParams.get("inc") === "true";
+        
+        let views = 479;
         try {
           const file = Bun.file("views.txt");
           if (await file.exists()) {
@@ -50,12 +53,13 @@ const server = serve({
           // ignore
         }
         
-        views += 1;
-        
-        try {
-          await Bun.write("views.txt", views.toString());
-        } catch (e) {
-          // ignore
+        if (shouldIncrement) {
+          views += 1;
+          try {
+            await Bun.write("views.txt", views.toString());
+          } catch (e) {
+            // ignore
+          }
         }
         
         return Response.json({ views });

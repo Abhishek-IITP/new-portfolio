@@ -27,14 +27,65 @@ export function TopInfo({ onOpenSearch }: { onOpenSearch?: () => void }) {
      }, []);
 
      useEffect(() => {
-          fetch("/api/views")
-               .then(res => res.json())
-               .then(data => {
-                    if (data && typeof data.views === "number") {
-                         setViews(data.views);
+          const fetchViews = async () => {
+               // Check if this visitor is unique in this browser
+               const isUnique = !localStorage.getItem("portfolio_visited");
+               if (isUnique) {
+                    try {
+                         localStorage.setItem("portfolio_visited", "true");
+                    } catch (e) {}
+               }
+
+               try {
+                    // 1. Try local server views API
+                    const url = isUnique ? "/api/views?inc=true" : "/api/views";
+                    const res = await fetch(url);
+                    if (res.ok) {
+                         const data = await res.json();
+                         if (data && typeof data.views === "number") {
+                              setViews(data.views);
+                              return;
+                         }
                     }
-               })
-               .catch(err => console.error("Error fetching views:", err));
+               } catch (err) {
+                    // Local server API failed or not running (e.g. Vercel deployment)
+                    console.log("Local views API not available, falling back to public CounterAPI.");
+               }
+
+               try {
+                    // 2. Fallback: Public keyless CounterAPI (namespace 'abhishekiitp', key 'portfolio')
+                    const apiUrl = isUnique 
+                         ? "https://api.counterapi.dev/v1/abhishekiitp/portfolio/up"
+                         : "https://api.counterapi.dev/v1/abhishekiitp/portfolio";
+                    const res = await fetch(apiUrl);
+                    if (res.ok) {
+                         const data = await res.json();
+                         if (data && typeof data.value === "number") {
+                              setViews(data.value + 479);
+                              return;
+                         }
+                    }
+               } catch (err) {
+                    console.error("Error fetching from public CounterAPI:", err);
+               }
+
+               // 3. Fallback: LocalStorage simulated views counter
+               try {
+                    const localViews = localStorage.getItem("portfolio_views_fallback");
+                    let currentViews = localViews ? parseInt(localViews, 10) : 479;
+                    if (isNaN(currentViews)) currentViews = 479;
+                    
+                    if (isUnique) {
+                         currentViews += 1;
+                         localStorage.setItem("portfolio_views_fallback", currentViews.toString());
+                    }
+                    setViews(currentViews);
+               } catch (e) {
+                    setViews(480);
+               }
+          };
+
+          fetchViews();
      }, []);
 
      return (
