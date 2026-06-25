@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { BreifDetail } from "./components/BreifDetail";
+import { ConnectHub } from "./components/ConnectHub";
 import { AboutSection } from "./components/About-Sectioon";
 import { GithubStreak } from "./components/GithubStreak";
 import { ProjectSection } from "./components/ProjectsSection";
@@ -101,10 +102,13 @@ export function App() {
         <div id="home">
           <TopVideo />
           <TopInfo onOpenSearch={cmdPalette.open} />
-          <BreifDetail />
+          {/* <BreifDetail /> */}
         </div>
         <div id="about">
           <AboutSection />
+          <ConnectHub />
+        </div>
+        <div id="tech">
           <TechStack />
         </div>
         <div id="experience">

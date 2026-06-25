@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence, animate } from "framer-motion";
-import { Home, FileText, Briefcase, LayoutGrid, GitBranch, Sun, Moon, Search } from "lucide-react";
+import { Home, FileText, Cpu, Briefcase, LayoutGrid, GitBranch, Sun, Moon, Search } from "lucide-react";
 import { useTheme } from "../context/ThemeProvider";
 
 type Section = {
@@ -11,7 +11,8 @@ type Section = {
 
 const sections: Section[] = [
      { id: "home", label: "Home", Icon: Home },
-     { id: "about", label: "About & Tech", Icon: FileText },
+     { id: "about", label: "Hola & Connect", Icon: FileText },
+     { id: "tech", label: "Tech Stack", Icon: Cpu },
      { id: "experience", label: "Experience", Icon: Briefcase },
      { id: "projects", label: "Projects", Icon: LayoutGrid },
      { id: "github", label: "GitHub Streak", Icon: GitBranch },

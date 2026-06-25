@@ -12,6 +12,8 @@ import {
      ArrowRight,
      Command,
      CornerDownLeft,
+     Link2,
+     Cpu,
 } from "lucide-react";
 import { useTheme } from "../context/ThemeProvider";
 import { projects } from "./ProjectsSection";
@@ -41,7 +43,8 @@ const educationEntries = [
 
 const sectionItems: Omit<SearchItem, "action">[] = [
      { id: "home", label: "Home", description: "Go to top", category: "section", icon: Home },
-     { id: "about", label: "About & Tech Stack", description: "About me and technologies", category: "section", icon: FileText },
+     { id: "about", label: "Hola & Connect", description: "About me & contact info", category: "section", icon: FileText },
+     { id: "tech", label: "Tech Stack", description: "Skills and technologies", category: "section", icon: Cpu },
      { id: "experience", label: "Experience", description: "Work experience & education", category: "section", icon: Briefcase },
      { id: "projects", label: "Projects", description: "All projects", category: "section", icon: LayoutGrid },
      { id: "github", label: "GitHub Streak", description: "Contribution graph", category: "section", icon: GitBranch },
@@ -78,6 +81,7 @@ export function CommandPalette({ isOpen, onClose }: { isOpen: boolean; onClose: 
                     currentHash === "" ||
                     currentHash === "#home" ||
                     currentHash === "#about" ||
+                    currentHash === "#tech" ||
                     currentHash === "#experience" ||
                     currentHash === "#projects" ||
                     currentHash === "#github";
