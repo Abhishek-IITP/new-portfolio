@@ -29,18 +29,23 @@ export function TopInfo({ onOpenSearch }: { onOpenSearch?: () => void }) {
      useEffect(() => {
           const fetchViews = async () => {
                try {
-                    const res = await fetch("/api/views");
+                    const res = await fetch("https://abhishek930.goatcounter.com/counter/TOTAL.json");
                     if (res.ok) {
                          const data = await res.json();
-                         if (data && typeof data.count === "number") {
-                              // Add 479 baseline views to reflect historical count
-                              const totalViews = data.count + 279;
-                              setViews(totalViews.toLocaleString());
+                         if (data && data.count) {
+                              const rawCount = parseInt(data.count.replace(/,/g, ""), 10);
+                              if (!isNaN(rawCount)) {
+                                   const totalViews = rawCount + 279;
+                                   setViews(totalViews.toLocaleString());
+                                   return;
+                              }
                          }
                     }
                } catch (err) {
-                    console.error("Error fetching views proxy:", err);
+                    console.warn("GoatCounter count fetch failed (likely local or settings not enabled). Using fallback baseline.", err);
                }
+               // Fallback baseline if GoatCounter settings are not checked or fetch fails
+               setViews("279");
           };
           fetchViews();
      }, []);

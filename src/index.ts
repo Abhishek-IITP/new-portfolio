@@ -33,26 +33,6 @@ const server = serve({
       return new Response("", { status: 404 });
     },
 
-    // 3. GoatCounter Counter API Proxy
-    "/api/views": {
-      async GET(req) {
-        try {
-          const response = await fetch("https://abhishek930.goatcounter.com/counter/TOTAL.json");
-          if (response.ok) {
-            const data = await response.json();
-            if (data && data.count) {
-              const rawCount = parseInt(data.count.replace(/,/g, ""), 10);
-              if (!isNaN(rawCount)) {
-                return Response.json({ count: rawCount });
-              }
-            }
-          }
-        } catch (e) {
-          console.error("Error proxying to GoatCounter counter API:", e);
-        }
-        return Response.json({ count: 0 });
-      }
-    },
 
     // 4. Hello API
     "/api/hello": {
