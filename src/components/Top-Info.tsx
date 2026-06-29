@@ -14,7 +14,7 @@ const roles = [
 
 export function TopInfo({ onOpenSearch }: { onOpenSearch?: () => void }) {
      const [roleIndex, setRoleIndex] = useState(0);
-     const [views, setViews] = useState<number | null>(null);
+     const [views, setViews] = useState<string | null>(null);
 
      useEffect(() => {
           const intervalId = window.setInterval(() => {
@@ -28,63 +28,20 @@ export function TopInfo({ onOpenSearch }: { onOpenSearch?: () => void }) {
 
      useEffect(() => {
           const fetchViews = async () => {
-               // Check if this visitor is unique in this browser
-               const isUnique = !localStorage.getItem("portfolio_visited");
-               if (isUnique) {
-                    try {
-                         localStorage.setItem("portfolio_visited", "true");
-                    } catch (e) {}
-               }
-
                try {
-                    // 1. Try local server views API
-                    const url = isUnique ? "/api/views?inc=true" : "/api/views";
-                    const res = await fetch(url);
+                    const res = await fetch("/api/views");
                     if (res.ok) {
                          const data = await res.json();
-                         if (data && typeof data.views === "number") {
-                              setViews(data.views);
-                              return;
+                         if (data && typeof data.count === "number") {
+                              // Add 479 baseline views to reflect historical count
+                              const totalViews = data.count + 279;
+                              setViews(totalViews.toLocaleString());
                          }
                     }
                } catch (err) {
-                    // Local server API failed or not running (e.g. Vercel deployment)
-                    console.log("Local views API not available, falling back to public CounterAPI.");
-               }
-
-               try {
-                    // 2. Fallback: Public keyless CounterAPI (namespace 'abhishekiitp', key 'portfolio')
-                    const apiUrl = isUnique 
-                         ? "https://api.counterapi.dev/v1/abhishekiitp/portfolio/up"
-                         : "https://api.counterapi.dev/v1/abhishekiitp/portfolio";
-                    const res = await fetch(apiUrl);
-                    if (res.ok) {
-                         const data = await res.json();
-                         if (data && typeof data.value === "number") {
-                              setViews(data.value + 479);
-                              return;
-                         }
-                    }
-               } catch (err) {
-                    console.error("Error fetching from public CounterAPI:", err);
-               }
-
-               // 3. Fallback: LocalStorage simulated views counter
-               try {
-                    const localViews = localStorage.getItem("portfolio_views_fallback");
-                    let currentViews = localViews ? parseInt(localViews, 10) : 479;
-                    if (isNaN(currentViews)) currentViews = 479;
-                    
-                    if (isUnique) {
-                         currentViews += 1;
-                         localStorage.setItem("portfolio_views_fallback", currentViews.toString());
-                    }
-                    setViews(currentViews);
-               } catch (e) {
-                    setViews(480);
+                    console.error("Error fetching views proxy:", err);
                }
           };
-
           fetchViews();
      }, []);
 
@@ -124,12 +81,14 @@ export function TopInfo({ onOpenSearch }: { onOpenSearch?: () => void }) {
                                    </motion.div>
                               </AnimatePresence>
                          </div>
-                         
+
                          {/* Views counter */}
-                         <div className="mt-2.5 flex items-center justify-center sm:justify-start gap-1.5 text-sm text-zinc-500 dark:text-zinc-500 font-medium select-none">
-                              <Eye className="h-4 w-4 shrink-0 text-zinc-400 dark:text-zinc-600" />
-                              <span>{views !== null ? views.toLocaleString() : "..."} profile views</span>
-                         </div>
+                         {views !== null && (
+                              <div className="mt-2.5 flex items-center justify-center sm:justify-start gap-1.5 text-sm text-zinc-500 dark:text-zinc-500 font-medium select-none animate-fade-in">
+                                   <Eye className="h-4 w-4 shrink-0 text-zinc-400 dark:text-zinc-600" />
+                                   <span>{views} profile views</span>
+                              </div>
+                         )}
                     </div>
                </div>
 

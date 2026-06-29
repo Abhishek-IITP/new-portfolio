@@ -33,36 +33,24 @@ const server = serve({
       return new Response("", { status: 404 });
     },
 
-    // 3. Views Counter API
+    // 3. GoatCounter Counter API Proxy
     "/api/views": {
       async GET(req) {
-        const url = new URL(req.url);
-        const shouldIncrement = url.searchParams.get("inc") === "true";
-        
-        let views = 479;
         try {
-          const file = Bun.file("views.txt");
-          if (await file.exists()) {
-            const content = await file.text();
-            const parsed = parseInt(content.trim(), 10);
-            if (!isNaN(parsed)) {
-              views = parsed;
+          const response = await fetch("https://abhishek930.goatcounter.com/counter/TOTAL.json");
+          if (response.ok) {
+            const data = await response.json();
+            if (data && data.count) {
+              const rawCount = parseInt(data.count.replace(/,/g, ""), 10);
+              if (!isNaN(rawCount)) {
+                return Response.json({ count: rawCount });
+              }
             }
           }
         } catch (e) {
-          // ignore
+          console.error("Error proxying to GoatCounter counter API:", e);
         }
-        
-        if (shouldIncrement) {
-          views += 1;
-          try {
-            await Bun.write("views.txt", views.toString());
-          } catch (e) {
-            // ignore
-          }
-        }
-        
-        return Response.json({ views });
+        return Response.json({ count: 0 });
       }
     },
 

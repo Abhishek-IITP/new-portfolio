@@ -1,13 +1,19 @@
 import { Within } from "@theme-toggles/react";
 import { useTheme } from "../context/ThemeProvider";
+import { playClickSound } from "../lib/utils";
 import "@theme-toggles/react/styles/within.css";
 
 const ThemeToggle = () => {
   const { toggleTheme } = useTheme();
 
+  const handleClick = () => {
+    toggleTheme();
+    playClickSound();
+  };
+
   return (
     <Within
-      onClick={toggleTheme}
+      onClick={handleClick}
       duration={750}
       className="
         theme-toggle

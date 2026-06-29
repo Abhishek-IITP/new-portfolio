@@ -37,6 +37,9 @@ const logoMapping: Record<string, string> = {
   "aws": "amazonaws",
   "github actions": "githubactions",
   "turborepo": "turborepo",
+  "tailwind css v4": "tailwindcss",
+  "gemini 2.5 flash": "googlegemini",
+  "node-cron": "node",
 };
 
 

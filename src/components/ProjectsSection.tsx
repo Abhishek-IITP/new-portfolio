@@ -11,6 +11,7 @@ import babuaLmsImage from "../public/babuaLmsImage.png";
 import whatsappLandingPageImage from "../public/whatsappLandingPageImage.png";
 import layersCloneImage from "../public/layersCloneImage.png";
 import secureChatAppImage from "../public/secureChatAppImage.png";
+import nexapostImage from "../public/nexapost.png";
 
 export type Project = {
      slug: string;
@@ -28,6 +29,40 @@ export type Project = {
 };
 
 export const projects: Project[] = [
+     {
+          slug: "nexapost",
+          title: "NexaPost",
+          dateRange: "06.2026 – Present",
+          status: "Live",
+          badge: "Featured",
+          summary: "AI-powered social media campaign orchestrator with Zernio OAuth, Gemini 2.5 Flash copy generation, and dynamic post scheduling.",
+          features: [
+               "Multi-channel social integration for Twitter (X), LinkedIn, Facebook, and Instagram via OAuth using Zernio.",
+               "AI Composer utilizing Gemini 2.5 Flash for tone-adjusted copy and Pollinations AI for context-matched images stored on Cloudinary.",
+               "Automated publication service powered by node-cron background worker running every minute to monitor and dispatch queued posts.",
+               "High-fidelity dashboard UI with detailed activity logging built with Tailwind CSS v4 and Framer Motion.",
+          ],
+          techStack: [
+               "React 19",
+               "Tailwind CSS v4",
+               "Framer Motion",
+               "Vite",
+               "TypeScript",
+               "Node.js",
+               "Express.js",
+               "MongoDB",
+               "Gemini 2.5 Flash",
+               "Zernio SDK",
+               "Pollinations AI",
+               "Cloudinary",
+               "Node-Cron",
+               "Vercel",
+          ],
+          liveUrl: "https://nexapost.vercel.app/",
+          githubUrl: "https://github.com/Abhishek-IITP/social-media-automation",
+          image: nexapostImage,
+          views: 0,
+     },
      { //blogsphere
           slug: "blogsphere",
           title: "BlogSphere",

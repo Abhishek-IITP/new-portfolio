@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link2 } from "lucide-react";
+import { playClickSound } from "../lib/utils";
 
 const myInfo = ` Hola 👋
 
-- I'm Abhishek Kumar Mohanty (call me Abhi) — a Full-Stack Developer and IIT Patna student focused on building modern web applications and AI-driven solutions.
+- I'm Abhishek Kumar Mohanty (call me Abhi) — a IIT Patna and Full-Stack Developer student focused on building modern web applications and AI-driven solutions.
 
 - Passionate about turning ideas into real products through thoughtful design, scalable architecture, and clean code.
 
@@ -26,63 +27,7 @@ export function AboutSection() {
           } catch {
           }
 
-          const AudioContextClass = window.AudioContext || (window as Window & typeof globalThis & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
-          const audioContext = AudioContextClass ? new AudioContextClass() : null;
-
-          if (!audioContext) return;
-
-          if (audioContext.state === "suspended") {
-               await audioContext.resume();
-          }
-
-          const now = audioContext.currentTime;
-
-          const clickOscillator = audioContext.createOscillator();
-          const clickGain = audioContext.createGain();
-          const clickFilter = audioContext.createBiquadFilter();
-
-          clickOscillator.type = "square";
-          clickOscillator.frequency.setValueAtTime(2400, now);
-          clickOscillator.frequency.exponentialRampToValueAtTime(1400, now + 0.012);
-
-          clickFilter.type = "highpass";
-          clickFilter.frequency.setValueAtTime(1800, now);
-
-          clickGain.gain.setValueAtTime(0.0001, now);
-          clickGain.gain.exponentialRampToValueAtTime(0.14, now + 0.002);
-          clickGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.022);
-
-          clickOscillator.connect(clickFilter);
-          clickFilter.connect(clickGain);
-          clickGain.connect(audioContext.destination);
-
-          const bufferSize = Math.floor(audioContext.sampleRate * 0.015);
-          const noiseBuffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate);
-          const noiseData = noiseBuffer.getChannelData(0);
-
-          for (let i = 0; i < bufferSize; i += 1) {
-               noiseData[i] = (Math.random() * 2 - 1) * (1 - i / bufferSize);
-          }
-
-          const noiseSource = audioContext.createBufferSource();
-          const noiseGain = audioContext.createGain();
-          const noiseFilter = audioContext.createBiquadFilter();
-
-          noiseSource.buffer = noiseBuffer;
-          noiseFilter.type = "highpass";
-          noiseFilter.frequency.setValueAtTime(2500, now);
-          noiseGain.gain.setValueAtTime(0.0001, now);
-          noiseGain.gain.exponentialRampToValueAtTime(0.08, now + 0.001);
-          noiseGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.018);
-
-          noiseSource.connect(noiseFilter);
-          noiseFilter.connect(noiseGain);
-          noiseGain.connect(audioContext.destination);
-
-          clickOscillator.start(now);
-          clickOscillator.stop(now + 0.025);
-          noiseSource.start(now);
-          noiseSource.stop(now + 0.018);
+          playClickSound();
      };
 
      return (
