@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Command, Eye } from "lucide-react";
-import meImage from "../public/me.jpg";
+import meImage from "../public/me.png";
 import "./Top-Info.css";
 import ThemeToggle from "./ThemeToggle";
 
@@ -56,7 +56,11 @@ export function TopInfo({ onOpenSearch }: { onOpenSearch?: () => void }) {
                     
                     {/* Squircle Avatar overlapping the banner */}
                     <div className="w-32 h-32 sm:w-36 sm:h-36 rounded-[2rem] overflow-hidden border-4 border-white dark:border-zinc-950 shadow-[0_8px_30px_rgb(0,0,0,0.12)] bg-zinc-100 flex-shrink-0 transition-transform duration-300 hover:scale-105">
-                         <img className="w-full h-full object-cover" src={meImage} alt="Abhishek Image" />
+                         <img 
+                              className="w-full h-full object-cover transition-all duration-500 ease-in-out dark:brightness-90" 
+                              src={meImage} 
+                              alt="Abhishek Image" 
+                         />
                     </div>
                     
                     {/* Name, Verified Badge, Role, and Views */}

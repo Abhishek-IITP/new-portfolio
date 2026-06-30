@@ -12,6 +12,7 @@ import whatsappLandingPageImage from "../public/whatsappLandingPageImage.png";
 import layersCloneImage from "../public/layersCloneImage.png";
 import secureChatAppImage from "../public/secureChatAppImage.png";
 import nexapostImage from "../public/nexapost.png";
+import omniMindImage from "../public/omniMindImage.png";
 
 export type Project = {
      slug: string;
@@ -29,7 +30,7 @@ export type Project = {
 };
 
 export const projects: Project[] = [
-     {
+     { //Nexapost
           slug: "nexapost",
           title: "NexaPost",
           dateRange: "06.2026 – Present",
@@ -82,6 +83,55 @@ export const projects: Project[] = [
           image: blogSphereImage,
           views: 171,
      },
+     { // OmniMind AI
+     slug: "omnimind-ai",
+     title: "OmniMind AI",
+     dateRange: "06.2026 – 06.2026",
+     status: "Live",
+     badge: "Featured",
+     summary: "AI-powered multi-agent recommendation hub that harnesses LangGraph orchestration, Gemini reasoning, and graph-based workflows to deliver intelligent recommendations across movies, books, music, and games.",
+     features: [
+          "Harnessed LangGraph to orchestrate specialized AI agents through a stateful graph-based execution pipeline",
+          "Built an intelligent AI Orchestrator that dynamically routes user intent to domain-specific recommendation agents",
+          "Integrated Gemini 2.5 Flash with LangChain for context-aware recommendation generation and structured reasoning",
+          "Implemented strict Zod schema validation to guarantee reliable, type-safe AI responses before client delivery", 
+          "Developed a real-time execution timeline that visualizes every orchestration stage during agent processing",
+          "Enriched recommendations with dynamic watch, stream, download, and purchase links from external platforms"
+     ],
+     techStack: [
+          "React 19",
+          "TypeScript",
+          "Tailwind CSS",
+          "Express.js",
+          "LangChain",
+          "LangGraph",
+          "Zod",
+          "Google Generative AI",
+     ],
+     liveUrl: "https://omnimindhub.vercel.app/",
+     githubUrl: "https://github.com/Abhishek-IITP/omniMindHub",
+     image: omniMindImage,
+     views: 0,
+},
+    { //ocean
+          slug: "ocean",
+          title: "Ocean",
+          dateRange: "06.2025 – 07.2025",
+          status: "Live",
+          badge: "Featured",
+          summary: "Full-stack scheduling platform with calendar sync, OAuth sign-in, and dynamic booking workflows.",
+          features: [
+               "Real-time calendar and meeting management powered by the Nylas API",
+               "Google and GitHub OAuth via NextAuth with a Supabase Postgres backend",
+               "Dynamic booking forms with live availability checks and Zod + Conform validation",
+               "Responsive landing page and dashboard UI using Tailwind CSS and shadcn/ui",
+          ],
+          techStack: ["Next.js", "Nylas", "Tailwind CSS", "Prisma", "Supabase", "Auth.js", "Zod", "Vercel"],
+          liveUrl: "https://github.com/Abhishek-IITP/ocean",
+          githubUrl: "https://github.com/Abhishek-IITP/ocean",
+          image: oceanImage,
+          views: 64,
+     },
      { //pingme
           slug: "pingme",
           title: "PingMe",
@@ -101,25 +151,7 @@ export const projects: Project[] = [
           image: pingMeImage,
           views: 98,
      },
-     { //ocean
-          slug: "ocean",
-          title: "Ocean",
-          dateRange: "06.2025 – 07.2025",
-          status: "Live",
-          badge: "Featured",
-          summary: "Full-stack scheduling platform with calendar sync, OAuth sign-in, and dynamic booking workflows.",
-          features: [
-               "Real-time calendar and meeting management powered by the Nylas API",
-               "Google and GitHub OAuth via NextAuth with a Supabase Postgres backend",
-               "Dynamic booking forms with live availability checks and Zod + Conform validation",
-               "Responsive landing page and dashboard UI using Tailwind CSS and shadcn/ui",
-          ],
-          techStack: ["Next.js", "Nylas", "Tailwind CSS", "Prisma", "Supabase", "Auth.js", "Zod", "Vercel"],
-          liveUrl: "https://github.com/Abhishek-IITP/ocean",
-          githubUrl: "https://github.com/Abhishek-IITP/ocean",
-          image: oceanImage,
-          views: 64,
-     },
+ 
      {
           slug: "secure-chat-app",
           title: "Secure Chat App",

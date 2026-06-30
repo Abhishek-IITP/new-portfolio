@@ -47,7 +47,7 @@ for (const file of files) {
   const originalSizeKB = (stat.size / 1024).toFixed(1);
 
   // Skip files that are already small (e.g. < 50KB) to avoid re-compression overhead
-  if (stat.size < 50 * 1024 && !file.includes("me.jpg") && !file.includes("logo")) {
+  if (stat.size < 50 * 1024 && !file.includes("me.png") && !file.includes("logo")) {
     console.log(`- Skipping ${file} (already small: ${originalSizeKB} KB)`);
     continue;
   }
