@@ -78,7 +78,7 @@ export const projects: Project[] = [
                "MVC-structured Express backend with a Redux-powered React frontend",
           ],
           techStack: ["React 19", "Redux Toolkit", "Tailwind CSS", "Framer Motion", "Firebase", "Editor.js", "Node.js", "Express.js", "MongoDB", "Cloudinary"],
-          liveUrl: "https://blog-sphere-zx96.vercel.app/",
+          liveUrl: "https://blogsphere-1.vercel.app/",
           githubUrl: "https://github.com/Abhishek-IITP/BlogSphere",
           image: blogSphereImage,
           views: 171,
