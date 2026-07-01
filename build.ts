@@ -1,4 +1,4 @@
-import { rm } from "node:fs/promises";
+import { copyFile, mkdir, rm } from "node:fs/promises";
 import path from "node:path";
 import { spawnSync } from "child_process";
 
@@ -23,6 +23,15 @@ const result = await Bun.build({
     "process.env.NODE_ENV": JSON.stringify("production"),
   },
 });
+
+const publicFiles = [...new Bun.Glob("src/public/**").scanSync()].filter((filePath) => !filePath.endsWith("/"));
+
+for (const filePath of publicFiles) {
+  const relativePath = path.relative(path.join(process.cwd(), "src/public"), filePath);
+  const destinationPath = path.join(outdir, relativePath);
+  await mkdir(path.dirname(destinationPath), { recursive: true });
+  await copyFile(filePath, destinationPath);
+}
 
 for (const output of result.outputs) {
   console.log(` ${path.relative(process.cwd(), output.path)}  ${(output.size / 1024).toFixed(1)} KB`);

@@ -13,6 +13,7 @@ import layersCloneImage from "../public/layersCloneImage.png";
 import secureChatAppImage from "../public/secureChatAppImage.png";
 import nexapostImage from "../public/nexapost.png";
 import omniMindImage from "../public/omniMindImage.png";
+import agentBenchImage from "../public/agentBenchImage.png";
 
 export type Project = {
      slug: string;
@@ -30,6 +31,42 @@ export type Project = {
 };
 
 export const projects: Project[] = [
+     { // agentbench
+     slug: "agentbench",
+     title: "AgentBench",
+     dateRange: "07.2026 – Present",
+     status: "Building",
+     badge: "Featured",
+     summary: "Reliability-first AI agent benchmarking platform that evaluates autonomous agents in isolated Linux environments using reproducible execution, statistical reliability metrics, replay traces, and benchmark health analysis.",
+     features: [
+          "Docker-powered isolated execution environment ensuring reproducible and deterministic benchmark runs",
+          "Filesystem-based benchmark tasks with hidden evaluation harness, Oracle/NOP validation, and reference solutions",
+          "Multi-run statistical evaluation engine measuring reliability, consistency, variance, and confidence across repeated executions",
+          "Advanced benchmark analytics including task difficulty calibration, benchmark health analysis, failure taxonomy, and replay traces",
+          "Interactive dashboard for comparing AI agents, visualizing execution timelines, leaderboards, and cost-performance metrics",
+     ],
+     techStack: [
+          "Python",
+          "Docker",
+          "Bun",
+          "Elysia",
+          "Next.js 16",
+          "React 19",
+          "Tailwind CSS",
+          "shadcn/ui",
+          "PostgreSQL",
+          "Drizzle ORM",
+          "Pytest",
+          "NumPy",
+          "Pandas",
+          "SciPy",
+          "Apache ECharts",
+     ],
+     liveUrl: "https://agent-bench-landing.vercel.app/",
+     githubUrl: "https://github.com/Abhishek-IITP/Agent-bench",
+     image: agentBenchImage,
+     views: 0,
+},
      { //Nexapost
           slug: "nexapost",
           title: "NexaPost",
