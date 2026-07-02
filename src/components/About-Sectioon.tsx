@@ -4,7 +4,7 @@ import { playClickSound } from "../lib/utils";
 
 const myInfo = ` Hola 👋
 
-- I'm Abhishek Kumar Mohanty (call me Abhi) — a IIT Patna and Full-Stack Developer student focused on building modern web applications and AI-driven solutions.
+- I'm Abhishek Kumar Mohanty (call me Abhi) — a IIT Patna student and Full-Stack Developer focused on building modern web applications and AI-driven solutions.
 
 - Passionate about turning ideas into real products through thoughtful design, scalable architecture, and clean code.
 

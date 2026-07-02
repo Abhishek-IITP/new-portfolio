@@ -1,8 +1,10 @@
-import { SVGProps, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import type { ReactElement, SVGProps } from "react";
 import { motion } from "framer-motion";
 import {
      BadgeCheck,
      Clock3,
+     Code2,
      Globe2,
      Mail,
      MapPin,
@@ -41,6 +43,8 @@ const CodechefIcon = (props: SVGProps<SVGSVGElement>) => (
      </svg>
 );
 
+const CodeforcesIcon = (props: SVGProps<SVGSVGElement>) => <Code2 {...props} />;
+
 // ─── Data ───────────────────────────────────────────────────────
 
 const details = {
@@ -59,15 +63,18 @@ type Profile = {
      name: string;
      username: string;
      href: string;
-     Icon: (props: SVGProps<SVGSVGElement>) => JSX.Element;
+     Icon: (props: SVGProps<SVGSVGElement>) => ReactElement;
 };
 
 const profiles: Profile[] = [
      { name: "GitHub", username: "Abhishek-IITP", href: "https://github.com/Abhishek-IITP", Icon: GithubIcon },
      { name: "LinkedIn", username: "abhishekiitp891", href: "https://www.linkedin.com/in/abhishekiitp891/", Icon: LinkedinIcon },
      { name: "LeetCode", username: "Abhishek-IITP", href: "https://leetcode.com/u/Abhishek-IITP/", Icon: LeetcodeIcon },
+     { name: "Codeforces", username: "abhishekmohanty7325", href: "https://codeforces.com/profile/abhishekmohanty7325", Icon: CodeforcesIcon },
      { name: "CodeChef", username: "abhishek_iitp1", href: "https://www.codechef.com/users/abhishek_iitp1", Icon: CodechefIcon },
 ];
+
+const resumeHref = "/Abhires.pdf";
 
 // ─── Animations ─────────────────────────────────────────────────
 
@@ -80,7 +87,7 @@ const cardReveal = {
      hidden: { opacity: 0, y: 20, scale: 0.97 },
      show: {
           opacity: 1, y: 0, scale: 1,
-          transition: { type: "spring", stiffness: 280, damping: 24 },
+          transition: { type: "spring" as const, stiffness: 280, damping: 24 },
      },
 };
 
@@ -170,7 +177,7 @@ export function ConnectHub() {
      return (
           <section className="relative overflow-hidden border-y border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 px-8 sm:px-10 py-6 text-zinc-900 dark:text-zinc-100">
                {/* Grid background */}
-               <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.025)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.025)_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:40px_40px]" />
+               <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.025)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.025)_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-size-[40px_40px]" />
 
                <div className="relative">
                     <SectionHeading />
@@ -190,11 +197,11 @@ export function ConnectHub() {
                               className="col-span-4 sm:col-span-8 lg:col-span-5 relative rounded-2xl bg-zinc-950 dark:bg-zinc-900 p-6 overflow-hidden group transition-all duration-300 border border-zinc-900 dark:border-zinc-700/50 hover:shadow-[0_20px_60px_rgba(0,0,0,0.2)] dark:hover:shadow-[0_20px_60px_rgba(0,0,0,0.4)]"
                          >
                               {/* Noise texture overlay */}
-                              <div className="pointer-events-none absolute inset-0 opacity-[0.035]" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")` }} />
+                              <div className="connect-noise pointer-events-none absolute inset-0 opacity-[0.035]" />
 
                               <div className="relative flex items-start justify-between gap-4">
                                    <div className="flex items-start gap-4">
-                                        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/[0.07] border border-white/[0.08]">
+                                        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/[0.07] border border-white/8">
                                              <BadgeCheck className="h-6 w-6 text-zinc-200" />
                                         </span>
                                         <div>
@@ -210,7 +217,7 @@ export function ConnectHub() {
                                         </div>
                                    </div>
 
-                                   <span className="relative flex items-center gap-1.5 rounded-full bg-white/[0.06] border border-white/[0.08] px-3 py-1.5 shrink-0">
+                                   <span className="relative flex items-center gap-1.5 rounded-full bg-white/6 border border-white/8 px-3 py-1.5 shrink-0">
                                         <span className="relative flex h-2 w-2">
                                              <span className="animate-ping absolute inset-0 rounded-full bg-emerald-400 opacity-50" />
                                              <span className="relative rounded-full h-2 w-2 bg-emerald-400" />
@@ -226,11 +233,11 @@ export function ConnectHub() {
                               href={googleMapsUrl}
                               target="_blank"
                               rel="noreferrer"
-                              className={`col-span-2 sm:col-span-4 lg:col-span-4 ${cardBase} p-5 flex flex-col justify-between group min-h-[128px]`}
+                              className={`col-span-2 sm:col-span-4 lg:col-span-4 ${cardBase} p-5 flex flex-col justify-between group min-h-32`}
                          >
                               <div className="flex items-center justify-between mb-auto">
                                    <MapPin className="h-5 w-5 text-zinc-400 dark:text-zinc-600" />
-                                   <ArrowUpRight className="h-3.5 w-3.5 text-zinc-300 dark:text-zinc-700 transition-all duration-200 group-hover:text-zinc-500 dark:group-hover:text-zinc-400 group-hover:translate-x-[1px] group-hover:-translate-y-[1px]" />
+                                   <ArrowUpRight className="h-3.5 w-3.5 text-zinc-300 dark:text-zinc-700 transition-all duration-200 group-hover:text-zinc-500 dark:group-hover:text-zinc-400 group-hover:translate-x-px group-hover:-translate-y-px" />
                               </div>
                               <div>
                                    <p className="text-[0.55rem] font-bold uppercase tracking-[0.25em] text-zinc-400 dark:text-zinc-600">Location</p>
@@ -241,7 +248,7 @@ export function ConnectHub() {
                          {/* LIVE CLOCK */}
                          <motion.div
                               variants={cardReveal}
-                              className={`col-span-2 sm:col-span-4 lg:col-span-3 ${cardBase} p-5 flex flex-col justify-between min-h-[128px]`}
+                              className={`col-span-2 sm:col-span-4 lg:col-span-3 ${cardBase} p-5 flex flex-col justify-between min-h-32`}
                          >
                               <div className="flex items-center justify-between mb-auto">
                                    <Clock3 className="h-5 w-5 text-zinc-400 dark:text-zinc-600" />
@@ -258,7 +265,7 @@ export function ConnectHub() {
                                         <span className="font-mono text-[1.2rem] font-bold text-zinc-300 dark:text-zinc-700 leading-none tracking-tighter tabular-nums">
                                              :{s}
                                         </span>
-                                        <span className="text-[0.6rem] font-bold text-zinc-400 dark:text-zinc-600 ml-1.5 tracking-wider self-end mb-[2px]">{ampm}</span>
+                                        <span className="text-[0.6rem] font-bold text-zinc-400 dark:text-zinc-600 ml-1.5 tracking-wider self-end mb-0.5">{ampm}</span>
                                    </div>
                               </div>
                          </motion.div>
@@ -327,7 +334,7 @@ export function ConnectHub() {
                                         <p className="text-[0.88rem] font-semibold text-zinc-950 dark:text-zinc-50 mt-0.5 truncate">abhiitp.tech</p>
                                    </div>
                               </div>
-                              <ArrowUpRight className="h-4 w-4 shrink-0 text-zinc-300 dark:text-zinc-700 transition-all duration-200 group-hover:text-zinc-500 dark:group-hover:text-zinc-400 group-hover:translate-x-[1px] group-hover:-translate-y-[1px]" />
+                              <ArrowUpRight className="h-4 w-4 shrink-0 text-zinc-300 dark:text-zinc-700 transition-all duration-200 group-hover:text-zinc-500 dark:group-hover:text-zinc-400 group-hover:translate-x-px group-hover:-translate-y-px" />
                          </motion.a>
 
                          {/* ═══ ROW 3 — Profiles + Resume ═══ */}
@@ -354,21 +361,21 @@ export function ConnectHub() {
                                                        <p className="text-[0.72rem] font-semibold text-zinc-800 dark:text-zinc-200 leading-tight">{name}</p>
                                                        <p className="text-[0.55rem] font-medium text-zinc-400 dark:text-zinc-600 truncate leading-tight">{username}</p>
                                                   </div>
-                                                  <ArrowUpRight className="h-3 w-3 shrink-0 text-zinc-300 dark:text-zinc-700 transition-all duration-200 group-hover/link:text-zinc-500 dark:group-hover/link:text-zinc-400 group-hover/link:translate-x-[1px] group-hover/link:-translate-y-[1px]" />
+                                                  <ArrowUpRight className="h-3 w-3 shrink-0 text-zinc-300 dark:text-zinc-700 transition-all duration-200 group-hover/link:text-zinc-500 dark:group-hover/link:text-zinc-400 group-hover/link:translate-x-px group-hover/link:-translate-y-px" />
                                              </a>
                                         ))}
                                    </div>
 
                                    {/* Resume CTA */}
                                    <a
-                                        href="/resume.pdf"
+                                        href={resumeHref}
                                         target="_blank"
-                                        rel="noreferrer"
+                                        rel="noopener noreferrer"
                                         className="group/resume inline-flex items-center justify-center gap-2 rounded-xl border border-zinc-200 bg-white px-5 py-2.5 transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] shrink-0 hover:bg-zinc-50 shadow-sm"
                                    >
                                         <FileText className="h-4 w-4 text-zinc-700" />
                                         <span className="text-[0.78rem] font-bold tracking-wide text-zinc-800">Resume</span>
-                                        <ArrowUpRight className="h-3.5 w-3.5 text-zinc-500 transition-transform duration-200 group-hover/resume:translate-x-[1px] group-hover/resume:-translate-y-[1px]" />
+                                        <ArrowUpRight className="h-3.5 w-3.5 text-zinc-500 transition-transform duration-200 group-hover/resume:translate-x-px group-hover/resume:-translate-y-px" />
                                    </a>
                               </div>
                          </motion.div>
